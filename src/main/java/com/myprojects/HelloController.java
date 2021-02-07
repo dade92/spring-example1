@@ -7,9 +7,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
+    private MyUseCase myUseCase;
+
+    public HelloController(
+            MyUseCase myUseCase
+    ) {
+        this.myUseCase = myUseCase;
+    }
+
     @GetMapping("hello")
     public ResponseEntity<Object> hello() {
-        System.out.println("Hello world resource called!!");
+        myUseCase.operation();
         return ResponseEntity.noContent().build();
     }
 
