@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableConfigurationProperties(
-        TestConfiguration.class
+    TestConfiguration.class
 )
 public class AppConfiguration {
 

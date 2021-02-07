@@ -7,7 +7,7 @@ public class MyUseCaseImpl implements MyUseCase {
     private TestConfiguration testConfiguration;
 
     public MyUseCaseImpl(
-            TestConfiguration testConfiguration
+        TestConfiguration testConfiguration
     ) {
         this.testConfiguration = testConfiguration;
     }
