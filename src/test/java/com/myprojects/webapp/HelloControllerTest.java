@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -24,7 +25,6 @@ public class HelloControllerTest {
     @MockBean
     private MyUseCase myUseCase;
 
-
     @Test
     public void helloIsCalled() throws Exception {
         mvc.perform(get("/hello")
@@ -32,5 +32,12 @@ public class HelloControllerTest {
                 .andExpect(status().isNoContent());
 
         verify(myUseCase).operation();
+    }
+
+    @Test
+    public void userDetailIsCalled() throws Exception {
+        mvc.perform(post("/user")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 }
