@@ -1,4 +1,4 @@
-package com.myprojects.webapp;
+package com.myprojects;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

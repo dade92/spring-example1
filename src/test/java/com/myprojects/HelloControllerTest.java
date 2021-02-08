@@ -1,4 +1,4 @@
-package com.myprojects.webapp;
+package com.myprojects;
 
 import com.myprojects.domain.MyUseCase;
 import com.myprojects.domain.User;
