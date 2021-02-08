@@ -2,6 +2,7 @@ package com.springexample.webapp;
 
 import com.springexample.domain.MyUseCase;
 import com.springexample.domain.User;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,12 +29,16 @@ public class HelloController {
 
     @PostMapping("user")
     public ResponseEntity<UserResponse> user(@RequestBody UserRequest userRequest) {
-        boolean result = myUseCase.authorize(new User(userRequest.getName(), userRequest.getPassword()));
+        boolean result = myUseCase.authorize(adaptUser(userRequest));
         if (result) {
             return ResponseEntity.ok(new UserResponse(Outcome.OK));
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    private User adaptUser(UserRequest userRequest) {
+        return new User(userRequest.getName(), userRequest.getPassword());
     }
 
 }
