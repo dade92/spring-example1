@@ -1,7 +1,7 @@
-package com.myprojects.webapp;
+package com.springexample.webapp;
 
-import com.myprojects.domain.MyUseCase;
-import com.myprojects.domain.User;
+import com.springexample.domain.MyUseCase;
+import com.springexample.domain.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

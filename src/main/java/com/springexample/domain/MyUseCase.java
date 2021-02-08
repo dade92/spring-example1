@@ -1,4 +1,4 @@
-package com.myprojects.domain;
+package com.springexample.domain;
 
 public interface MyUseCase {
     void operation();

@@ -1,6 +1,6 @@
-package com.myprojects.domain;
+package com.springexample.domain;
 
-import com.myprojects.webapp.TestConfiguration;
+import com.springexample.webapp.TestConfiguration;
 
 public class MyUseCaseImpl implements MyUseCase {
 
