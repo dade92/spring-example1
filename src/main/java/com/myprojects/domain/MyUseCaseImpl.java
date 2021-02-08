@@ -1,6 +1,6 @@
 package com.myprojects.domain;
 
-import com.myprojects.TestConfiguration;
+import com.myprojects.webapp.TestConfiguration;
 
 public class MyUseCaseImpl implements MyUseCase {
 

@@ -1,4 +1,4 @@
-package com.myprojects;
+package com.myprojects.webapp;
 
 import java.util.Objects;
 
