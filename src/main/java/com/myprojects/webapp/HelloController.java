@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
-    private MyUseCase myUseCase;
+    private final MyUseCase myUseCase;
 
     public HelloController(
         MyUseCase myUseCase
