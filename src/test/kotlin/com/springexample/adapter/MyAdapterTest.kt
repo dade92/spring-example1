@@ -2,6 +2,7 @@ package com.springexample.adapter
 
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Assert
+import org.junit.Assert.*
 import org.junit.Test
 
 class MyAdapterTest {
@@ -10,6 +11,6 @@ class MyAdapterTest {
 
     @Test
     fun adapt() {
-        Assert.assertThat(adapter.adapt(), `is`(1))
+        assertThat(adapter.adapt(), `is`(1))
     }
 }
