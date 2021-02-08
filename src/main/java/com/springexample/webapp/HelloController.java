@@ -2,6 +2,9 @@ package com.springexample.webapp;
 
 import com.springexample.domain.MyUseCase;
 import com.springexample.domain.User;
+import com.springexample.webapp.data.Outcome;
+import com.springexample.webapp.data.UserRequest;
+import com.springexample.webapp.data.UserResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,8 +1,7 @@
-package com.springexample.webapp;
+package com.springexample.webapp.data;
 
 public class UserResponse {
     private final Outcome result;
-
 
     public UserResponse(Outcome result) {
         this.result = result;
@@ -11,8 +10,4 @@ public class UserResponse {
     public Outcome getResult() {
         return result;
     }
-}
-
-enum Outcome {
-    OK, KO
 }

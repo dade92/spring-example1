@@ -1,4 +1,4 @@
-package com.springexample.webapp;
+package com.springexample.webapp.data;
 
 import java.util.Objects;
 
