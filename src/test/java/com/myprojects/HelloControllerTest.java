@@ -30,23 +30,37 @@ public class HelloControllerTest {
     @Test
     public void helloIsCalled() throws Exception {
         mvc.perform(get("/hello")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNoContent());
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isNoContent());
 
         verify(myUseCase).operation();
     }
 
     @Test
-    public void userDetailIsCalled() throws Exception {
+    public void userDetailIsCalledSuccessfully() throws Exception {
+        User user = new User("davide", "testPassword");
+        when(myUseCase.authorize(user)).thenReturn(true);
+
+        mvc.perform(post("/user")
+            .content("{\n" +
+                "    \"name\": \"davide\",\n" +
+                "    \"password\": \"testPassword\"\n" +
+                "}")
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk());
+    }
+
+    @Test
+    public void userDetailIsCalledFailing() throws Exception {
         User user = new User("davide", "testPassword");
         when(myUseCase.authorize(user)).thenReturn(false);
 
         mvc.perform(post("/user")
-                .content("{\n" +
-                        "    \"name\": \"davide\",\n" +
-                        "    \"password\": \"testPassword\"\n" +
-                        "}")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isInternalServerError());
+            .content("{\n" +
+                "    \"name\": \"davide\",\n" +
+                "    \"password\": \"testPassword\"\n" +
+                "}")
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isInternalServerError());
     }
 }
