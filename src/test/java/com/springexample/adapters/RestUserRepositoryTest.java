@@ -31,7 +31,7 @@ public class RestUserRepositoryTest {
     @Test
     public void fetch() {
         stubFor(get(urlEqualTo("/user/666"))
-            .willReturn(okJson("{\"id\": 666, \"username\":\"Davide\"}")));
+            .willReturn(okJson("{\"user\":{\"id\": 666, \"username\":\"Davide\"}}")));
 
         Optional<User> user = restUserRepository.fetch(666L);
 

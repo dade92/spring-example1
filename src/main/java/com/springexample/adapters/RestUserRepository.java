@@ -48,6 +48,6 @@ public class RestUserRepository implements UserRepository {
     }
 
     private User adaptUser(RestUserResponse response) {
-        return new User(response.getUsername(), "");
+        return new User(response.getUser().getUsername(), "");
     }
 }
