@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HelloController {
+public class UserController {
 
     private final MyUseCase myUseCase;
 
-    public HelloController(
+    public UserController(
         MyUseCase myUseCase
     ) {
         this.myUseCase = myUseCase;
