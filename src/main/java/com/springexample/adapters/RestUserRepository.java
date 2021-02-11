@@ -33,6 +33,20 @@ public class RestUserRepository implements UserRepository {
         }
     }
 
+    @Override
+    public Optional<Integer> addUser(User user) {
+        ResponseEntity<String> response = restOperations.postForEntity(
+            basePath + "/addUser",
+            new RestUserRequest(user.getName(), user.getPassword()),
+            String.class
+        );
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return Optional.of(1);
+        } else {
+            return Optional.empty();
+        }
+    }
+
     private User adaptUser(RestUserResponse response) {
         return new User(response.getUsername(), "");
     }

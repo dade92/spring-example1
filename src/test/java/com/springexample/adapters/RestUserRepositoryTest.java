@@ -37,4 +37,15 @@ public class RestUserRepositoryTest {
 
         assertThat(user, is(Optional.of(new User("Davide", ""))));
     }
+
+    @Test
+    public void addUser() {
+        stubFor(post(urlEqualTo("/addUser"))
+            .withRequestBody(equalToJson("{\"username\":\"Davide\", \"password\":\"Botti\"}"))
+            .willReturn(ok()));
+
+        Optional<Integer> result = restUserRepository.addUser(new User("Davide", "Botti"));
+
+        assertThat(result, is(Optional.of(1)));
+    }
 }

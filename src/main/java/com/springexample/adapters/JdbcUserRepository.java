@@ -29,4 +29,10 @@ public class JdbcUserRepository implements UserRepository {
         }
     }
 
+    @Override
+    public Optional<Integer> addUser(User user) {
+
+        return null;
+    }
+
 }
