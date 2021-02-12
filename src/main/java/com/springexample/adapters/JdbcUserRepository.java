@@ -31,8 +31,8 @@ public class JdbcUserRepository implements UserRepository {
 
     @Override
     public Optional<Integer> addUser(User user) {
-
-        return null;
+        jdbcTemplate.update("INSERT INTO USERS (USERNAME, PASSWORD) VALUES (?, ?)", user.getName(), user.getPassword());
+        return Optional.of(1);
     }
 
 }

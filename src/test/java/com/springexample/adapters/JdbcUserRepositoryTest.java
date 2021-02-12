@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 import static org.hamcrest.Matchers.is;
@@ -34,6 +35,25 @@ public class JdbcUserRepositoryTest {
         Optional<User> user = jdbcUserRepository.fetch(666L);
 
         assertThat(user, is(Optional.of(new User("Davide", "Botti"))));
+    }
+
+    @Test
+    public void addUser() {
+        jdbcUserRepository.addUser(new User("Davide", "Botti"));
+
+        User user = findUser("Davide", "Botti");
+
+        assertThat(Optional.of(user), is(Optional.of(new User("Davide", "Botti"))));
+    }
+
+    private User findUser(String username, String password) {
+        return jdbcTemplate.queryForObject("SELECT * FROM USERS WHERE USERNAME=? AND PASSWORD=?",
+            Arrays.asList(username,password).toArray(),
+            (resultSet, i) -> new User(
+                resultSet.getString("USERNAME"),
+                resultSet.getString("PASSWORD")
+            )
+        );
     }
 
     private void insertUser(long id, String username, String password) {
