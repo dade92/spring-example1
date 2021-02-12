@@ -8,6 +8,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Optional;
 
 import static org.hamcrest.Matchers.is;
@@ -29,25 +30,25 @@ public class JdbcUserRepositoryTest {
 
     @Test
     public void fetch() {
-        insertUser(666L, "Davide", "Botti");
+        insertUser(666L, "Davide", "XXX");
 
         Optional<User> user = jdbcUserRepository.fetch(666L);
 
-        assertThat(user, is(Optional.of(new User("Davide", "Botti"))));
+        assertThat(user, is(Optional.of(new User("Davide", "XXX"))));
     }
 
     @Test
     public void addUser() {
-        jdbcUserRepository.addUser(new User("Davide", "Botti"));
+        jdbcUserRepository.addUser(new User("Davide", "XXX"));
 
-        User user = findUser("Davide", "Botti");
+        User user = findUser("Davide");
 
-        assertThat(Optional.of(user), is(Optional.of(new User("Davide", "Botti"))));
+        assertThat(Optional.of(user), is(Optional.of(new User("Davide", "XXX"))));
     }
 
-    private User findUser(String username, String password) {
-        return jdbcTemplate.queryForObject("SELECT * FROM USERS WHERE USERNAME=? AND PASSWORD=?",
-            Arrays.asList(username,password).toArray(),
+    private User findUser(String username) {
+        return jdbcTemplate.queryForObject("SELECT * FROM USERS WHERE USERNAME=?",
+            Collections.singletonList(username).toArray(),
             (resultSet, i) -> new User(
                 resultSet.getString("USERNAME"),
                 resultSet.getString("PASSWORD")
