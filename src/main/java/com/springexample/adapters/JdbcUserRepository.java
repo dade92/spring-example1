@@ -5,6 +5,7 @@ import com.springexample.domain.UserRepository;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 public class JdbcUserRepository implements UserRepository {
@@ -18,7 +19,8 @@ public class JdbcUserRepository implements UserRepository {
     @Override
     public Optional<User> fetch(long userId) {
         try {
-            User user = jdbcTemplate.queryForObject("SELECT * FROM USERS WHERE ID=" + userId,
+            User user = jdbcTemplate.queryForObject("SELECT * FROM USERS WHERE ID=?",
+                Arrays.asList(userId).toArray(),
                 (resultSet, i) -> new User(
                     resultSet.getString("USERNAME"),
                     resultSet.getString("PASSWORD")
