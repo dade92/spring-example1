@@ -28,7 +28,7 @@ public class RestUserRepository implements UserRepository {
             restOperations.getForEntity(basePath + "/user/" + userId, RestUserResponse.class);
 
         if (response.getStatusCode() == HttpStatus.OK) {
-            return Optional.of(adaptUser(response.getBody()));
+            return Optional.of(adaptUser(response.getBody().getUser()));
         } else {
             return Optional.empty();
         }
@@ -53,7 +53,7 @@ public class RestUserRepository implements UserRepository {
         }
     }
 
-    private User adaptUser(RestUserResponse response) {
-        return new User(response.getUser().getUsername(), response.getUser().getPassword());
+    private User adaptUser(RestUser user) {
+        return new User(user.getUsername(), user.getPassword());
     }
 }
