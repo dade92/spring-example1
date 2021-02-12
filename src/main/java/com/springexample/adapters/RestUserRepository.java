@@ -10,8 +10,8 @@ import java.util.Optional;
 
 public class RestUserRepository implements UserRepository {
 
-    private String basePath;
-    private RestOperations restOperations;
+    private final String basePath;
+    private final RestOperations restOperations;
 
     public RestUserRepository(
         String basePath,

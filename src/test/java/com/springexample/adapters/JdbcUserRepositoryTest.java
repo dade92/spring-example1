@@ -1,7 +1,6 @@
 package com.springexample.adapters;
 
 import com.springexample.domain.User;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
