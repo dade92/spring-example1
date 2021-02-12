@@ -16,10 +16,10 @@ public class RestUserRepository implements UserRepository {
 
     public RestUserRepository(
         String basePath,
-        RestOperations restOperations
+        RestOperations client
     ) {
         this.basePath = basePath;
-        this.restOperations = restOperations;
+        this.restOperations = client;
     }
 
     @Override

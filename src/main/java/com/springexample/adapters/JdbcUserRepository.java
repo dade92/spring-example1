@@ -3,23 +3,23 @@ package com.springexample.adapters;
 import com.springexample.domain.User;
 import com.springexample.domain.UserRepository;
 import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.JdbcOperations;
 
 import java.util.Arrays;
 import java.util.Optional;
 
 public class JdbcUserRepository implements UserRepository {
 
-    private final JdbcTemplate jdbcTemplate;
+    private final JdbcOperations jdbc;
 
-    public JdbcUserRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public JdbcUserRepository(JdbcOperations jdbc) {
+        this.jdbc = jdbc;
     }
 
     @Override
     public Optional<User> fetch(long userId) {
         try {
-            User user = jdbcTemplate.queryForObject("SELECT * FROM USERS WHERE ID=?",
+            User user = jdbc.queryForObject("SELECT * FROM USERS WHERE ID=?",
                 Arrays.asList(userId).toArray(),
                 (resultSet, i) -> new User(
                     resultSet.getString("USERNAME"),
@@ -40,7 +40,7 @@ public class JdbcUserRepository implements UserRepository {
     @Override
     public Optional<Boolean> addUser(User user) {
         try {
-            jdbcTemplate.update("INSERT INTO USERS (USERNAME, PASSWORD) VALUES (?, ?)", user.getName(), user.getPassword());
+            jdbc.update("INSERT INTO USERS (USERNAME, PASSWORD) VALUES (?, ?)", user.getName(), user.getPassword());
             return Optional.of(true);
         } catch (DataAccessException e) {
             e.printStackTrace();
