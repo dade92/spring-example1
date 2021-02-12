@@ -24,12 +24,17 @@ public class RestUserRepository implements UserRepository {
 
     @Override
     public Optional<User> fetch(long userId) {
-        ResponseEntity<RestUserResponse> response =
-            restOperations.getForEntity(basePath + "/user/" + userId, RestUserResponse.class);
+        try {
+            ResponseEntity<RestUserResponse> response =
+                restOperations.getForEntity(basePath + "/user/" + userId, RestUserResponse.class);
 
-        if (response.getStatusCode() == HttpStatus.OK) {
-            return Optional.of(adaptUser(response.getBody().getUser()));
-        } else {
+            if (response.getStatusCode() == HttpStatus.OK) {
+                return Optional.of(adaptUser(response.getBody().getUser()));
+            } else {
+                return Optional.empty();
+            }
+        } catch (RestClientException e) {
+            e.printStackTrace();
             return Optional.empty();
         }
     }

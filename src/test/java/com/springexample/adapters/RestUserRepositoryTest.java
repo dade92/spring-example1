@@ -5,6 +5,7 @@ import com.springexample.domain.User;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Optional;
@@ -36,6 +37,14 @@ public class RestUserRepositoryTest {
         Optional<User> user = restUserRepository.fetch(666L);
 
         assertThat(user, is(Optional.of(new User("Davide", "XXX"))));
+    }
+
+    @Test
+    public void fetchFails() {
+        stubFor(get(urlEqualTo("/user/666"))
+            .willReturn(status(HttpStatus.INTERNAL_SERVER_ERROR.value())));
+
+        assertThat(restUserRepository.fetch(666L), is(Optional.empty()));
     }
 
     @Test
