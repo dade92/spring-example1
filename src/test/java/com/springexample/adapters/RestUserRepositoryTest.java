@@ -40,7 +40,15 @@ public class RestUserRepositoryTest {
     }
 
     @Test
-    public void fetchFails() {
+    public void fetchFailsWith4xx() {
+        stubFor(get(urlEqualTo("/user/666"))
+            .willReturn(status(HttpStatus.BAD_REQUEST.value())));
+
+        assertThat(restUserRepository.fetch(666L), is(Optional.empty()));
+    }
+
+    @Test
+    public void fetchFailsWith5xx() {
         stubFor(get(urlEqualTo("/user/666"))
             .willReturn(status(HttpStatus.INTERNAL_SERVER_ERROR.value())));
 
@@ -59,7 +67,18 @@ public class RestUserRepositoryTest {
     }
 
     @Test
-    public void addUserFails() {
+    public void addUserFailsWith4xx() {
+        stubFor(post(urlEqualTo("/addUser"))
+            .withRequestBody(equalToJson("{\"username\":\"Davide\", \"password\":\"XXX\"}"))
+            .willReturn(status(400)));
+
+        Optional<Boolean> result = restUserRepository.addUser(new User("Davide", "XXX"));
+
+        assertThat(result, is(Optional.empty()));
+    }
+
+    @Test
+    public void addUserFailsWith5xx() {
         stubFor(post(urlEqualTo("/addUser"))
             .withRequestBody(equalToJson("{\"username\":\"Davide\", \"password\":\"XXX\"}"))
             .willReturn(status(500)));
