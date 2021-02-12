@@ -39,13 +39,24 @@ public class RestUserRepositoryTest {
     }
 
     @Test
-    public void addUser() {
+    public void addUserSuccessfully() {
         stubFor(post(urlEqualTo("/addUser"))
             .withRequestBody(equalToJson("{\"username\":\"Davide\", \"password\":\"Botti\"}"))
             .willReturn(ok()));
 
-        Optional<Integer> result = restUserRepository.addUser(new User("Davide", "Botti"));
+        Optional<Boolean> result = restUserRepository.addUser(new User("Davide", "Botti"));
 
-        assertThat(result, is(Optional.of(1)));
+        assertThat(result, is(Optional.of(true)));
+    }
+
+    @Test
+    public void addUserFails() {
+        stubFor(post(urlEqualTo("/addUser"))
+            .withRequestBody(equalToJson("{\"username\":\"Davide\", \"password\":\"Botti\"}"))
+            .willReturn(status(500)));
+
+        Optional<Boolean> result = restUserRepository.addUser(new User("Davide", "Botti"));
+
+        assertThat(result, is(Optional.empty()));
     }
 }

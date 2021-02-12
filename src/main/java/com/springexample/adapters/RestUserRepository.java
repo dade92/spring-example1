@@ -4,6 +4,7 @@ import com.springexample.domain.User;
 import com.springexample.domain.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestOperations;
 
 import java.util.Optional;
@@ -34,15 +35,20 @@ public class RestUserRepository implements UserRepository {
     }
 
     @Override
-    public Optional<Integer> addUser(User user) {
-        ResponseEntity<String> response = restOperations.postForEntity(
-            basePath + "/addUser",
-            new RestUserRequest(user.getName(), user.getPassword()),
-            String.class
-        );
-        if (response.getStatusCode() == HttpStatus.OK) {
-            return Optional.of(1);
-        } else {
+    public Optional<Boolean> addUser(User user) {
+        try {
+            ResponseEntity<String> response = restOperations.postForEntity(
+                basePath + "/addUser",
+                new RestUserRequest(user.getName(), user.getPassword()),
+                String.class
+            );
+            if (response.getStatusCode() == HttpStatus.OK) {
+                return Optional.of(true);
+            } else {
+                return Optional.empty();
+            }
+        } catch (RestClientException e) {
+            e.printStackTrace();
             return Optional.empty();
         }
     }
