@@ -31,20 +31,20 @@ public class RestUserRepositoryTest {
     @Test
     public void fetch() {
         stubFor(get(urlEqualTo("/user/666"))
-            .willReturn(okJson("{\"user\":{\"id\": 666, \"username\":\"Davide\"}}")));
+            .willReturn(okJson("{\"user\":{\"id\": 666, \"username\":\"Davide\", \"password\":\"XXX\"}}")));
 
         Optional<User> user = restUserRepository.fetch(666L);
 
-        assertThat(user, is(Optional.of(new User("Davide", ""))));
+        assertThat(user, is(Optional.of(new User("Davide", "XXX"))));
     }
 
     @Test
     public void addUserSuccessfully() {
         stubFor(post(urlEqualTo("/addUser"))
-            .withRequestBody(equalToJson("{\"username\":\"Davide\", \"password\":\"Botti\"}"))
+            .withRequestBody(equalToJson("{\"username\":\"Davide\", \"password\":\"XXX\"}"))
             .willReturn(ok()));
 
-        Optional<Boolean> result = restUserRepository.addUser(new User("Davide", "Botti"));
+        Optional<Boolean> result = restUserRepository.addUser(new User("Davide", "XXX"));
 
         assertThat(result, is(Optional.of(true)));
     }
@@ -52,10 +52,10 @@ public class RestUserRepositoryTest {
     @Test
     public void addUserFails() {
         stubFor(post(urlEqualTo("/addUser"))
-            .withRequestBody(equalToJson("{\"username\":\"Davide\", \"password\":\"Botti\"}"))
+            .withRequestBody(equalToJson("{\"username\":\"Davide\", \"password\":\"XXX\"}"))
             .willReturn(status(500)));
 
-        Optional<Boolean> result = restUserRepository.addUser(new User("Davide", "Botti"));
+        Optional<Boolean> result = restUserRepository.addUser(new User("Davide", "XXX"));
 
         assertThat(result, is(Optional.empty()));
     }

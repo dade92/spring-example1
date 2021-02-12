@@ -3,6 +3,7 @@ package com.springexample.adapters;
 public class RestUser {
     private long id;
     private String username;
+    private String password;
 
     public RestUser() {
     }
@@ -21,5 +22,13 @@ public class RestUser {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
