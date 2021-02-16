@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.RestController
 class PathController {
 
     @GetMapping("path/{userId}")
-    fun path(
-        @PathVariable userId: Long
-    ): ResponseEntity<PathResponse> = ResponseEntity.ok(PathResponse(userId))
+    fun path(@PathVariable userId: Long): ResponseEntity<PathResponse> =
+        ResponseEntity.ok(PathResponse(userId))
 
 }
 
