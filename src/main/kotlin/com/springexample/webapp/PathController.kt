@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RestController
 class PathController {
 
     @GetMapping("path")
-    fun path(): ResponseEntity<Object> {
-        return ResponseEntity.noContent().build()
-    }
+    fun path(): ResponseEntity<Any> = ResponseEntity.noContent().build()
 
 }
