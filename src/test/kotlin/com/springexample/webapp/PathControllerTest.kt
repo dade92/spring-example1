@@ -8,7 +8,8 @@ import org.springframework.http.MediaType
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 
 @RunWith(SpringRunner::class)
 @WebMvcTest(PathController::class)
@@ -20,7 +21,7 @@ class PathControllerTest {
     @Test
     fun pathIsCalled() {
         mvc.perform(
-            get("/path").contentType(MediaType.APPLICATION_JSON)
-        ).andExpect(status().isNoContent)
+            get("/path/123").contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isOk).andExpect(content().json("""{id: 123}"""))
     }
 }
