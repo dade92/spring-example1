@@ -13,7 +13,7 @@ pipeline {
         }
         stage('build image') {
             steps {
-                sh 'docker build -t spring-example1 docker/'
+                sh 'docker build -t spring-example1 .'
             }
         }
     }
