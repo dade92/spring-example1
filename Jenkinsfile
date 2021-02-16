@@ -1,8 +1,5 @@
 pipeline {
-    agent {
-        dockerfile true
-        build 'docker'
-    }
+    agent any
     stages {
         stage('Build') {
             steps {
@@ -12,6 +9,11 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'mvn verify'
+            }
+        }
+        stage('build image') {
+            steps {
+                sh 'docker build -t spring-example1 .'
             }
         }
     }
