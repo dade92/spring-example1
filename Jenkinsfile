@@ -11,5 +11,10 @@ pipeline {
                 sh 'mvn verify'
             }
         }
+        stage('build docker image') {
+            steps {
+                sh 'docker build --build-arg project=spring-example1-1.0-SNAPSHOT -t spring-example1 .'
+            }
+        }
     }
 }
