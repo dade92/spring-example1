@@ -6,6 +6,8 @@ public class UserRequest {
     private String name;
     private String password;
 
+    private String address;
+
     public String getName() {
         return name;
     }
@@ -20,6 +22,14 @@ public class UserRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @Override

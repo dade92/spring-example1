@@ -1,6 +1,7 @@
 package com.springexample.webapp;
 
 import com.springexample.domain.MyUseCase;
+import com.springexample.domain.RetrieveUserUseCase;
 import com.springexample.domain.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +11,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.Optional;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -28,18 +31,29 @@ public class UserControllerTest {
     @MockBean
     private MyUseCase myUseCase;
 
-    @Test
-    public void helloIsCalled() throws Exception {
-        mvc.perform(get("/hello")
-            .contentType(MediaType.APPLICATION_JSON))
-            .andExpect(status().isNoContent());
+    @MockBean
+    private RetrieveUserUseCase retrieveUserUseCase;
 
-        verify(myUseCase).operation();
+    @Test
+    public void getUserRetrieveCorrectUser() throws Exception {
+        when(retrieveUserUseCase.retrieve(123))
+            .thenReturn(Optional.of(new User(
+                "davide",
+                "XXX",
+                "via verdi"
+            )));
+
+        mvc.perform(get("/user/123")
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().json("{id:123, username:\"davide\", address: \"via verdi\"}"));
+
+        verify(retrieveUserUseCase).retrieve(123);
     }
 
     @Test
     public void userDetailIsCalledSuccessfully() throws Exception {
-        User user = new User("davide", "testPassword");
+        User user = new User("davide", "testPassword", "address");
         when(myUseCase.authorize(user)).thenReturn(true);
 
         mvc.perform(post("/user")
@@ -54,7 +68,7 @@ public class UserControllerTest {
 
     @Test
     public void userDetailIsCalledFailing() throws Exception {
-        User user = new User("davide", "testPassword");
+        User user = new User("davide", "testPassword", "address");
         when(myUseCase.authorize(user)).thenReturn(false);
 
         mvc.perform(post("/user")

@@ -59,6 +59,6 @@ public class RestUserRepository implements UserRepository {
     }
 
     private User adaptUser(RestUser user) {
-        return new User(user.getUsername(), user.getPassword());
+        return new User(user.getUsername(), user.getPassword(), "address");
     }
 }

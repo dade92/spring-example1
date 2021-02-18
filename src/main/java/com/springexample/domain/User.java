@@ -5,10 +5,12 @@ import java.util.Objects;
 public class User {
     private final String name;
     private final String password;
+    private final String address;
 
-    public User(String name, String password) {
+    public User(String name, String password, String address) {
         this.name = name;
         this.password = password;
+        this.address = address;
     }
 
     public String getName() {
@@ -17,6 +19,10 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     @Override

@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Optional;
 
@@ -34,16 +33,16 @@ public class JdbcUserRepositoryTest {
 
         Optional<User> user = jdbcUserRepository.fetch(666L);
 
-        assertThat(user, is(Optional.of(new User("Davide", "XXX"))));
+        assertThat(user, is(Optional.of(new User("Davide", "XXX", "address"))));
     }
 
     @Test
     public void addUser() {
-        jdbcUserRepository.addUser(new User("Davide", "XXX"));
+        jdbcUserRepository.addUser(new User("Davide", "XXX", "address"));
 
         User user = findUser("Davide");
 
-        assertThat(Optional.of(user), is(Optional.of(new User("Davide", "XXX"))));
+        assertThat(Optional.of(user), is(Optional.of(new User("Davide", "XXX", "address"))));
     }
 
     private User findUser(String username) {
@@ -51,8 +50,8 @@ public class JdbcUserRepositoryTest {
             Collections.singletonList(username).toArray(),
             (resultSet, i) -> new User(
                 resultSet.getString("USERNAME"),
-                resultSet.getString("PASSWORD")
-            )
+                resultSet.getString("PASSWORD"),
+                "address")
         );
     }
 

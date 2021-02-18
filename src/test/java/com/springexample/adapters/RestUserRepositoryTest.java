@@ -36,7 +36,7 @@ public class RestUserRepositoryTest {
 
         Optional<User> user = restUserRepository.fetch(666L);
 
-        assertThat(user, is(Optional.of(new User("Davide", "XXX"))));
+        assertThat(user, is(Optional.of(new User("Davide", "XXX", "address"))));
     }
 
     @Test
@@ -61,7 +61,7 @@ public class RestUserRepositoryTest {
             .withRequestBody(equalToJson("{\"username\":\"Davide\", \"password\":\"XXX\"}"))
             .willReturn(ok()));
 
-        Optional<Boolean> result = restUserRepository.addUser(new User("Davide", "XXX"));
+        Optional<Boolean> result = restUserRepository.addUser(new User("Davide", "XXX", "address"));
 
         assertThat(result, is(Optional.of(true)));
     }
@@ -72,7 +72,7 @@ public class RestUserRepositoryTest {
             .withRequestBody(equalToJson("{\"username\":\"Davide\", \"password\":\"XXX\"}"))
             .willReturn(status(400)));
 
-        Optional<Boolean> result = restUserRepository.addUser(new User("Davide", "XXX"));
+        Optional<Boolean> result = restUserRepository.addUser(new User("Davide", "XXX", "address"));
 
         assertThat(result, is(Optional.empty()));
     }
@@ -83,7 +83,7 @@ public class RestUserRepositoryTest {
             .withRequestBody(equalToJson("{\"username\":\"Davide\", \"password\":\"XXX\"}"))
             .willReturn(status(500)));
 
-        Optional<Boolean> result = restUserRepository.addUser(new User("Davide", "XXX"));
+        Optional<Boolean> result = restUserRepository.addUser(new User("Davide", "XXX", "address"));
 
         assertThat(result, is(Optional.empty()));
     }
