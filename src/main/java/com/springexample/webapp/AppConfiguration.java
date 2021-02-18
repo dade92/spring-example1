@@ -4,8 +4,6 @@ import com.springexample.adapters.JdbcUserRepository;
 import com.springexample.domain.MyUseCase;
 import com.springexample.domain.MyUseCaseImpl;
 import com.springexample.domain.UserRepository;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -23,8 +21,8 @@ import javax.sql.DataSource;
 public class AppConfiguration {
 
     @Bean
-    public MyUseCase myUseCase(TestConfiguration testConfiguration) {
-        return new MyUseCaseImpl(testConfiguration);
+    public MyUseCase myUseCase(TestConfiguration testConfiguration, UserRepository userRepository) {
+        return new MyUseCaseImpl(testConfiguration, userRepository);
     }
 
     @Bean
@@ -38,9 +36,7 @@ public class AppConfiguration {
     }
 
     @Bean
-    public UserRepository userRepository(
-        DataSource appDataSource
-    ) {
+    public UserRepository userRepository(DataSource appDataSource) {
         JdbcOperations jdbcOperations = new JdbcTemplate(appDataSource);
 
         return new JdbcUserRepository(
