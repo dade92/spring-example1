@@ -38,12 +38,13 @@ public class AppConfiguration {
     }
 
     @Bean
-    public UserRepository userRepository(DataSource appDataSource) {
-        JdbcOperations jdbcOperations = new JdbcTemplate(appDataSource);
+    public JdbcTemplate appJdbcTemplate(DataSource appDataSource) {
+        return new JdbcTemplate(appDataSource);
+    }
 
-        return new JdbcUserRepository(
-            jdbcOperations
-        );
+    @Bean
+    public UserRepository userRepository(JdbcTemplate appJdbcTemplate) {
+        return new JdbcUserRepository(appJdbcTemplate);
     }
 
 }
