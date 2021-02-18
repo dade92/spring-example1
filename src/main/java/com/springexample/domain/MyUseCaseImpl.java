@@ -18,11 +18,6 @@ public class MyUseCaseImpl implements MyUseCase {
     }
 
     @Override
-    public void operation() {
-        System.out.println("My url is: " + testConfiguration.url);
-    }
-
-    @Override
     public boolean authorize(User user) {
         System.out.println("User: " + user.getName() + " with password: " + user.getPassword());
         Optional<User> fetch = userRepository.fetch(666);
