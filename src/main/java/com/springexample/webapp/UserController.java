@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @PostMapping("user")
-    public ResponseEntity<UserResponse> retrieve(@RequestBody UserRequest userRequest) {
+    public ResponseEntity<UserResponse> save(@RequestBody UserRequest userRequest) {
         boolean result = myUseCase.authorize(adaptUser(userRequest));
         if (result) {
             return ResponseEntity.ok(new UserResponse(Outcome.OK));
