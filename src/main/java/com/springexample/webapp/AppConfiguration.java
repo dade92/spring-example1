@@ -3,15 +3,12 @@ package com.springexample.webapp;
 import com.springexample.adapters.JdbcUserRepository;
 import com.springexample.domain.MyUseCase;
 import com.springexample.domain.MyUseCaseImpl;
-import com.springexample.domain.PathUseCase;
-import com.springexample.domain.PathUseCaseImpl;
 import com.springexample.domain.UserRepository;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
