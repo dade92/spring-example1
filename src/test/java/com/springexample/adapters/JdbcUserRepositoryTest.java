@@ -29,11 +29,11 @@ public class JdbcUserRepositoryTest {
 
     @Test
     public void fetch() {
-        insertUser(666L, "Davide", "XXX");
+        insertUser(666L, "Davide", "XXX","via vai");
 
         Optional<User> user = jdbcUserRepository.fetch(666L);
 
-        assertThat(user, is(Optional.of(new User("Davide", "XXX", "address"))));
+        assertThat(user, is(Optional.of(new User("Davide", "XXX", "via vai"))));
     }
 
     @Test
@@ -55,7 +55,7 @@ public class JdbcUserRepositoryTest {
         );
     }
 
-    private void insertUser(long id, String username, String password) {
-        jdbcTemplate.update("INSERT INTO USERS VALUES (?, ?, ?)", id, username, password);
+    private void insertUser(long id, String username, String password, String address) {
+        jdbcTemplate.update("INSERT INTO USERS VALUES (?, ?, ?, ?)", id, username, password, address);
     }
 }

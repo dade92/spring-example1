@@ -24,7 +24,7 @@ public class JdbcUserRepository implements UserRepository {
                 (resultSet, i) -> new User(
                     resultSet.getString("USERNAME"),
                     resultSet.getString("PASSWORD"),
-                    "address")
+                    resultSet.getString("ADDRESS"))
             );
             if (user != null) {
                 return Optional.of(user);
