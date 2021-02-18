@@ -4,7 +4,7 @@ import java.util.Optional;
 
 public class DefaultRetrieveUserUseCase implements RetrieveUserUseCase {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public DefaultRetrieveUserUseCase(UserRepository userRepository) {
         this.userRepository = userRepository;
