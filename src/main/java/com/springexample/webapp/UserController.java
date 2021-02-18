@@ -49,7 +49,8 @@ public class UserController {
     }
 
     private User adaptUser(UserRequest userRequest) {
-        return new User(userRequest.getName(), userRequest.getPassword(), userRequest.getAddress());
+        //TODO fix this address
+        return new User(userRequest.getName(), userRequest.getPassword(), "address");
     }
 
 }
