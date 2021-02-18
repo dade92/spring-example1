@@ -1,9 +1,7 @@
 package com.springexample.webapp;
 
 import com.springexample.adapters.JdbcUserRepository;
-import com.springexample.domain.MyUseCase;
-import com.springexample.domain.MyUseCaseImpl;
-import com.springexample.domain.UserRepository;
+import com.springexample.domain.*;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +16,11 @@ import javax.sql.DataSource;
     TestConfiguration.class
 )
 public class AppConfiguration {
+
+    @Bean
+    public RetrieveUserUseCase retrieveUserUseCase(UserRepository userRepository) {
+        return new DefaultRetrieveUserUseCase(userRepository);
+    }
 
     @Bean
     public MyUseCase myUseCase(TestConfiguration testConfiguration, UserRepository userRepository) {
