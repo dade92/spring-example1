@@ -20,16 +20,18 @@ public class JdbcUserRepositoryTest {
 
     @Before
     public void setUp() {
-        jdbcTemplate = new JdbcTemplate(new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2)
-            .addScript("classpath:schema.sql")
-            .build()
+        jdbcTemplate = new JdbcTemplate(
+            new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2)
+                .addScript("classpath:schema.sql")
+                .build()
         );
+
         jdbcUserRepository = new JdbcUserRepository(jdbcTemplate);
     }
 
     @Test
     public void fetch() {
-        insertUser(666L, "Davide", "XXX","via vai");
+        insertUser(666L, "Davide", "XXX", "via vai");
 
         Optional<User> user = jdbcUserRepository.fetch(666L);
 

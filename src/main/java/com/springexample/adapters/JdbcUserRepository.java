@@ -2,7 +2,6 @@ package com.springexample.adapters;
 
 import com.springexample.domain.User;
 import com.springexample.domain.UserRepository;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcOperations;
 
