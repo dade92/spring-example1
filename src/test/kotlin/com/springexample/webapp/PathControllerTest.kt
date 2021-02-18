@@ -1,5 +1,6 @@
 package com.springexample.webapp
 
+import arrow.core.Right
 import com.springexample.domain.Path
 import com.springexample.domain.PathId
 import com.springexample.domain.PathUseCase
@@ -29,7 +30,7 @@ class PathControllerTest {
 
     @Test
     fun pathIsCalled() {
-        `when`(pathUseCase.retrieve(PathId(123L))).thenReturn(Path(123, "INFO"))
+        `when`(pathUseCase.retrieve(PathId(123L))).thenReturn(Right(Path(123, "INFO")))
 
         mvc.perform(
             get("/path/123").contentType(MediaType.APPLICATION_JSON)

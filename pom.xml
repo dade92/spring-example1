@@ -27,6 +27,7 @@
         <h2.version>1.4.200</h2.version>
         <wiremock-jre8.version>2.27.2</wiremock-jre8.version>
         <junit.version>4.12</junit.version>
+        <arrow-core.version>0.11.0</arrow-core.version>
     </properties>
 
     <dependencies>
@@ -43,6 +44,11 @@
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
             <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.arrow-kt</groupId>
+            <artifactId>arrow-core</artifactId>
+            <version>${arrow-core.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

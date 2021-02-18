@@ -1,7 +1,9 @@
 package com.springexample.webapp
 
+import arrow.core.flatMap
 import com.springexample.domain.PathId
 import com.springexample.domain.PathUseCase
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -14,8 +16,14 @@ class PathController(
 
     @GetMapping("path/{userId}")
     fun path(@PathVariable userId: Long): ResponseEntity<PathResponse> {
-        val path = pathUseCase.retrieve(PathId(userId))
-        return ResponseEntity.ok(PathResponse(path.id))
+        return pathUseCase.retrieve(PathId(userId)).fold(
+            {
+                ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build()
+            },
+            {
+                ResponseEntity.ok(PathResponse(it.id))
+            }
+        )
     }
 
 }
