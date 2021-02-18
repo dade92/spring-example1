@@ -57,7 +57,7 @@ public class UserControllerTest {
 
         mvc.perform(get("/user/123")
             .contentType(MediaType.APPLICATION_JSON))
-            .andExpect(status().isInternalServerError());
+            .andExpect(status().isNotFound());
 
         verify(retrieveUserUseCase).retrieve(123);
     }

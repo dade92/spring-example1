@@ -35,7 +35,7 @@ public class UserController {
                 userId,
                 value.getName(),
                 value.getAddress()
-            ))).orElseGet(() -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
+            ))).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @PostMapping("user")
