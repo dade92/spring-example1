@@ -18,9 +18,4 @@ public class AppConfiguration {
     public MyUseCase myUseCase(TestConfiguration testConfiguration) {
         return new MyUseCaseImpl(testConfiguration);
     }
-
-    @Bean
-    public PathUseCase pathUseCase() {
-        return new PathUseCaseImpl();
-    }
 }

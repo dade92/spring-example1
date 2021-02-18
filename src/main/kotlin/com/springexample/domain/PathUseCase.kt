@@ -5,9 +5,7 @@ interface PathUseCase {
 }
 
 class PathUseCaseImpl: PathUseCase {
-    override fun retrieve(pathId: PathId): Path {
-        TODO("Not yet implemented")
-    }
+    override fun retrieve(pathId: PathId): Path = Path(pathId.id, "INFO")
 }
 
 data class PathId(
