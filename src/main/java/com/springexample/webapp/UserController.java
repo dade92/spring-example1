@@ -27,12 +27,6 @@ public class UserController {
         this.retrieveUserUseCase = retrieveUserUseCase;
     }
 
-    @GetMapping("hello")
-    public ResponseEntity<Object> hello() {
-        myUseCase.operation();
-        return ResponseEntity.noContent().build();
-    }
-
     @GetMapping("user/{userId}")
     public ResponseEntity<RetrieveUserResponse> retrieve(@PathVariable long userId) {
         Optional<User> user = retrieveUserUseCase.retrieve(userId);

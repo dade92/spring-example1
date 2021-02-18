@@ -52,6 +52,17 @@ public class UserControllerTest {
     }
 
     @Test
+    public void getUserFails() throws Exception {
+        when(retrieveUserUseCase.retrieve(123)).thenReturn(Optional.empty());
+
+        mvc.perform(get("/user/123")
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isInternalServerError());
+
+        verify(retrieveUserUseCase).retrieve(123);
+    }
+
+    @Test
     public void userDetailIsCalledSuccessfully() throws Exception {
         User user = new User("davide", "testPassword", "address");
         when(myUseCase.authorize(user)).thenReturn(true);
