@@ -30,17 +30,16 @@ public class UserController {
         Optional<User> user = retrieveUserUseCase.retrieve(userId);
         return user.map(value -> ResponseEntity.ok(
             new RetrieveUserResponse(
-                userId,
                 value.getName(),
                 value.getAddress()
             ))).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @GetMapping
-    public ResponseEntity<RetrieveByUsernameUserResponse> retrieve(@RequestParam String username) {
+    public ResponseEntity<RetrieveUserResponse> retrieve(@RequestParam String username) {
         Optional<User> user = retrieveUserUseCase.retrieveByUsername(username);
         return user.map(value -> ResponseEntity.ok(
-            new RetrieveByUsernameUserResponse(
+            new RetrieveUserResponse(
                 value.getName(),
                 value.getAddress()
             ))).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());

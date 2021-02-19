@@ -1,12 +1,10 @@
 package com.springexample.webapp.data;
 
 public class RetrieveUserResponse {
-    private long id;
     private String username;
     private String address;
 
-    public RetrieveUserResponse(long id, String username, String address) {
-        this.id = id;
+    public RetrieveUserResponse(String username, String address) {
         this.username = username;
         this.address = address;
     }
@@ -25,13 +23,5 @@ public class RetrieveUserResponse {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 }

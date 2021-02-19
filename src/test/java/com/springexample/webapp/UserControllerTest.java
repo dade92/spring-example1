@@ -46,7 +46,7 @@ public class UserControllerTest {
         mvc.perform(get("/user/123")
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
-            .andExpect(content().json("{id:123, username:\"davide\", address: \"via verdi\"}"));
+            .andExpect(content().json("{username:\"davide\", address: \"via verdi\"}"));
 
         verify(retrieveUserUseCase).retrieve(123);
     }
