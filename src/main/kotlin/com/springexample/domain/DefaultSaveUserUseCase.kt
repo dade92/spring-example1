@@ -1,15 +1,9 @@
-package com.springexample.domain;
+package com.springexample.domain
 
-public class DefaultSaveUserUseCase implements SaveUserUseCase {
+class DefaultSaveUserUseCase(
+    private val userRepository: UserRepository
+) : SaveUserUseCase {
 
-    private final UserRepository userRepository;
+    override fun save(user: User): Boolean = userRepository.addUser(user).isPresent
 
-    public DefaultSaveUserUseCase(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
-    @Override
-    public boolean save(User user) {
-        return userRepository.addUser(user).isPresent();
-    }
 }
