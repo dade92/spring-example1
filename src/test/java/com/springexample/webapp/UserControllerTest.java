@@ -80,14 +80,16 @@ public class UserControllerTest {
     }
 
     @Test
-    public void userDetailIsCalledFailing() throws Exception {
+    public void saveUserFails() throws Exception {
         User user = new User("davide", "testPassword", "address");
+
         when(saveUserUseCase.save(user)).thenReturn(false);
 
-        mvc.perform(post("/user")
+        mvc.perform(post("/user/save")
             .content("{\n" +
-                "    \"name\": \"davide\",\n" +
-                "    \"password\": \"testPassword\"\n" +
+                "    \"username\": \"davide\",\n" +
+                "    \"password\": \"testPassword\",\n" +
+                "    \"address\": \"via vai\"\n" +
                 "}")
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isInternalServerError());
