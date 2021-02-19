@@ -23,7 +23,7 @@ public class AppConfiguration {
     }
 
     @Bean
-    public SaveUserUseCase myUseCase(TestConfiguration testConfiguration, UserRepository userRepository) {
+    public SaveUserUseCase saveUserUseCase(TestConfiguration testConfiguration, UserRepository userRepository) {
         return new DefaultSaveUserUseCase(userRepository);
     }
 
@@ -46,5 +46,4 @@ public class AppConfiguration {
     public UserRepository userRepository(JdbcTemplate appJdbcTemplate) {
         return new JdbcUserRepository(appJdbcTemplate);
     }
-
 }

@@ -2,7 +2,7 @@ package com.springexample.domain;
 
 public class DefaultSaveUserUseCase implements SaveUserUseCase {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public DefaultSaveUserUseCase(UserRepository userRepository) {
         this.userRepository = userRepository;
