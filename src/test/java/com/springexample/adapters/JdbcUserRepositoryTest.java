@@ -47,6 +47,15 @@ public class JdbcUserRepositoryTest {
         assertThat(Optional.of(user), is(Optional.of(new User("Davide", "XXX", "address"))));
     }
 
+    @Test
+    public void fetchByUsernameSuccess() {
+        insertUser(666L, "Davide", "XXX", "via vai");
+
+        Optional<User> user = jdbcUserRepository.fetchByUsername("Davide");
+
+        assertThat(user, is(Optional.of(new User("Davide", "XXX", "via vai"))));
+    }
+
     private User findUser(String username) {
         return jdbcTemplate.queryForObject("SELECT * FROM USERS WHERE USERNAME=?",
             Collections.singletonList(username).toArray(),

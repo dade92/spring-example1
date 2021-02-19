@@ -51,6 +51,24 @@ public class JdbcUserRepository implements UserRepository {
         }
     }
 
+    @Override
+    public Optional<User> fetchByUsername(String username) {
+        try {
+            User user = jdbcOperations.queryForObject("SELECT * FROM USERS WHERE USERNAME=?",
+                Arrays.asList(username).toArray(),
+                (resultSet, i) -> adaptUser(resultSet)
+            );
+            if (user != null) {
+                return Optional.of(user);
+            } else {
+                return Optional.empty();
+            }
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+            return Optional.empty();
+        }
+    }
+
     private User adaptUser(ResultSet resultSet) throws SQLException {
         return new User(
             resultSet.getString("USERNAME"),
