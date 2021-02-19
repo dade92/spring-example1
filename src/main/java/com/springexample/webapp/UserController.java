@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
     private final SaveUserUseCase saveUserUseCase;
@@ -27,7 +28,7 @@ public class UserController {
         this.retrieveUserUseCase = retrieveUserUseCase;
     }
 
-    @GetMapping("user/{userId}")
+    @GetMapping("/{userId}")
     public ResponseEntity<RetrieveUserResponse> retrieve(@PathVariable long userId) {
         Optional<User> user = retrieveUserUseCase.retrieve(userId);
         return user.map(value -> ResponseEntity.ok(
@@ -38,7 +39,7 @@ public class UserController {
             ))).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
-    @PostMapping("user/save")
+    @PostMapping("/save")
     public ResponseEntity<UserResponse> save(@RequestBody UserRequest userRequest) {
         boolean result = saveUserUseCase.save(adaptUser(userRequest));
 
@@ -50,7 +51,6 @@ public class UserController {
     }
 
     private User adaptUser(UserRequest userRequest) {
-        //TODO fix this address
         return new User(userRequest.getUsername(), userRequest.getPassword(), userRequest.getAddress());
     }
 
