@@ -13,7 +13,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableConfigurationProperties(
-    TestConfiguration.class
+    {TestConfiguration.class, DbConfiguration.class}
 )
 public class AppConfiguration {
 
@@ -29,11 +29,13 @@ public class AppConfiguration {
 
     @Bean
     @Primary
-    public DataSource appDataSource() {
+    public DataSource appDataSource(
+        DbConfiguration dbConfiguration
+    ) {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-        dataSourceBuilder.url("jdbc:mysql://localhost:3306/spring-example");
-        dataSourceBuilder.username("root");
-        dataSourceBuilder.password("1191992Da");
+        dataSourceBuilder.url(dbConfiguration.url);
+        dataSourceBuilder.username(dbConfiguration.username);
+        dataSourceBuilder.password(dbConfiguration.password);
         return dataSourceBuilder.build();
     }
 
