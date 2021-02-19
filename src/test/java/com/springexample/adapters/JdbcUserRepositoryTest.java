@@ -30,7 +30,7 @@ public class JdbcUserRepositoryTest {
     }
 
     @Test
-    public void fetch() {
+    public void fetchSuccessfully() {
         insertUser(666L, "Davide", "XXX", "via vai");
 
         Optional<User> user = jdbcUserRepository.fetch(666L);
@@ -39,7 +39,7 @@ public class JdbcUserRepositoryTest {
     }
 
     @Test
-    public void addUser() {
+    public void addUserSuccessfully() {
         jdbcUserRepository.addUser(new User("Davide", "XXX", "address"));
 
         User user = findUser("Davide");
@@ -48,7 +48,7 @@ public class JdbcUserRepositoryTest {
     }
 
     @Test
-    public void fetchByUsernameSuccess() {
+    public void fetchByUsernameSuccessfully() {
         insertUser(666L, "Davide", "XXX", "via vai");
 
         Optional<User> user = jdbcUserRepository.fetchByUsername("Davide");
