@@ -2,6 +2,8 @@ package com.springexample.adapters;
 
 import com.springexample.domain.User;
 import com.springexample.domain.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcOperations;
 
@@ -11,6 +13,8 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public class JdbcUserRepository implements UserRepository {
+
+    private static final Logger logger  = LoggerFactory.getLogger(JdbcUserRepository.class.getName());
 
     private final JdbcOperations jdbcOperations;
 
@@ -31,6 +35,7 @@ public class JdbcUserRepository implements UserRepository {
                 return Optional.empty();
             }
         } catch (DataAccessException e) {
+            logger.error("Cannot fetch user {}", userId);
             e.printStackTrace();
             return Optional.empty();
         }
@@ -46,6 +51,7 @@ public class JdbcUserRepository implements UserRepository {
             );
             return Optional.of(true);
         } catch (DataAccessException e) {
+            logger.error("Cannot save user with username {}", user.getName());
             e.printStackTrace();
             return Optional.empty();
         }
@@ -64,6 +70,7 @@ public class JdbcUserRepository implements UserRepository {
                 return Optional.empty();
             }
         } catch (DataAccessException e) {
+            logger.error("Cannot retrieve user with username {}", username);
             e.printStackTrace();
             return Optional.empty();
         }
