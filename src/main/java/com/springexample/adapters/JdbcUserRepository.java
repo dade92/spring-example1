@@ -36,22 +36,26 @@ public class JdbcUserRepository implements UserRepository {
         }
     }
 
-    private User adaptUser(ResultSet resultSet) throws SQLException {
-        return new User(
-            resultSet.getString("USERNAME"),
-            resultSet.getString("PASSWORD"),
-            resultSet.getString("ADDRESS"));
-    }
-
     @Override
     public Optional<Boolean> addUser(User user) {
         try {
-            jdbcOperations.update("INSERT INTO USERS (USERNAME, PASSWORD) VALUES (?, ?)", user.getName(), user.getPassword());
+            jdbcOperations.update("INSERT INTO USERS (USERNAME, PASSWORD, ADDRESS) VALUES (?, ?, ?)",
+                user.getName(),
+                user.getPassword(),
+                user.getAddress()
+            );
             return Optional.of(true);
         } catch (DataAccessException e) {
             e.printStackTrace();
             return Optional.empty();
         }
+    }
+
+    private User adaptUser(ResultSet resultSet) throws SQLException {
+        return new User(
+            resultSet.getString("USERNAME"),
+            resultSet.getString("PASSWORD"),
+            resultSet.getString("ADDRESS"));
     }
 
 }

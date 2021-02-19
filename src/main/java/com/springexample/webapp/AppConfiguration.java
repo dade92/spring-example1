@@ -24,7 +24,7 @@ public class AppConfiguration {
 
     @Bean
     public SaveUserUseCase myUseCase(TestConfiguration testConfiguration, UserRepository userRepository) {
-        return new SaveUserUseCaseImpl(testConfiguration, userRepository);
+        return new DefaultSaveUserUseCase(userRepository);
     }
 
     @Bean
