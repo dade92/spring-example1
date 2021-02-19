@@ -3,10 +3,7 @@ package com.springexample.webapp;
 import com.springexample.domain.SaveUserUseCase;
 import com.springexample.domain.RetrieveUserUseCase;
 import com.springexample.domain.User;
-import com.springexample.webapp.data.Outcome;
-import com.springexample.webapp.data.RetrieveUserResponse;
-import com.springexample.webapp.data.UserRequest;
-import com.springexample.webapp.data.UserResponse;
+import com.springexample.webapp.data.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +31,16 @@ public class UserController {
         return user.map(value -> ResponseEntity.ok(
             new RetrieveUserResponse(
                 userId,
+                value.getName(),
+                value.getAddress()
+            ))).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
+    @GetMapping
+    public ResponseEntity<RetrieveByUsernameUserResponse> retrieve(@RequestParam String username) {
+        Optional<User> user = retrieveUserUseCase.retrieveByUsername(username);
+        return user.map(value -> ResponseEntity.ok(
+            new RetrieveByUsernameUserResponse(
                 value.getName(),
                 value.getAddress()
             ))).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());

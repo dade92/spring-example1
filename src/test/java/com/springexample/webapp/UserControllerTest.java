@@ -63,6 +63,25 @@ public class UserControllerTest {
     }
 
     @Test
+    public void retrieveUserByUsernameSuccess() throws Exception {
+        String username = "davide";
+
+        when(retrieveUserUseCase.retrieveByUsername(username))
+            .thenReturn(Optional.of(new User(
+                "davide",
+                "XXX",
+                "via verdi"
+            )));
+
+        mvc.perform(get("/user?username=davide")
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().json("{username:\"davide\", address: \"via verdi\"}"));
+
+        verify(retrieveUserUseCase).retrieveByUsername(username);
+    }
+
+    @Test
     public void saveUserSuccessfully() throws Exception {
         User user = new User("davide", "testPassword", "via vai");
 
