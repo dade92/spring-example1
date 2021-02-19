@@ -14,4 +14,9 @@ public class DefaultRetrieveUserUseCase implements RetrieveUserUseCase {
     public Optional<User> retrieve(long userId) {
         return userRepository.fetch(userId);
     }
+
+    @Override
+    public Optional<User> retrieveByUsername(String username) {
+        return userRepository.fetchByUsername(username);
+    }
 }

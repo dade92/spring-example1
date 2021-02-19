@@ -38,4 +38,16 @@ public class DefaultRetrieveUserUseCaseTest {
 
         assertThat(defaultRetrieveUserUseCase.retrieve(666L), is(expectedResult));
     }
+
+    @Test
+    public void retrieveUserByUsernameHappyPath() {
+        Optional<User> expectedResult = Optional.of(new User("ciccio", "pasticcio", "via vai"));
+
+        context.checking(new Expectations() {{
+            oneOf(userRepository).fetchByUsername("ciccio");
+            will(returnValue(expectedResult));
+        }});
+
+        assertThat(defaultRetrieveUserUseCase.retrieveByUsername("ciccio"), is(expectedResult));
+    }
 }
