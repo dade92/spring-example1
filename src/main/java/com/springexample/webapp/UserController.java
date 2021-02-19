@@ -1,6 +1,6 @@
 package com.springexample.webapp;
 
-import com.springexample.domain.MyUseCase;
+import com.springexample.domain.SaveUserUseCase;
 import com.springexample.domain.RetrieveUserUseCase;
 import com.springexample.domain.User;
 import com.springexample.webapp.data.Outcome;
@@ -16,14 +16,14 @@ import java.util.Optional;
 @RestController
 public class UserController {
 
-    private final MyUseCase myUseCase;
+    private final SaveUserUseCase saveUserUseCase;
     private final RetrieveUserUseCase retrieveUserUseCase;
 
     public UserController(
-        MyUseCase myUseCase,
+        SaveUserUseCase saveUserUseCase,
         RetrieveUserUseCase retrieveUserUseCase
     ) {
-        this.myUseCase = myUseCase;
+        this.saveUserUseCase = saveUserUseCase;
         this.retrieveUserUseCase = retrieveUserUseCase;
     }
 
@@ -38,9 +38,10 @@ public class UserController {
             ))).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
-    @PostMapping("user")
+    @PostMapping("user/save")
     public ResponseEntity<UserResponse> save(@RequestBody UserRequest userRequest) {
-        boolean result = myUseCase.authorize(adaptUser(userRequest));
+        boolean result = saveUserUseCase.save(adaptUser(userRequest));
+
         if (result) {
             return ResponseEntity.ok(new UserResponse(Outcome.OK));
         } else {
@@ -50,7 +51,7 @@ public class UserController {
 
     private User adaptUser(UserRequest userRequest) {
         //TODO fix this address
-        return new User(userRequest.getName(), userRequest.getPassword(), "address");
+        return new User(userRequest.getUsername(), userRequest.getPassword(), userRequest.getAddress());
     }
 
 }

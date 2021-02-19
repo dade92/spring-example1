@@ -23,8 +23,8 @@ public class AppConfiguration {
     }
 
     @Bean
-    public MyUseCase myUseCase(TestConfiguration testConfiguration, UserRepository userRepository) {
-        return new MyUseCaseImpl(testConfiguration, userRepository);
+    public SaveUserUseCase myUseCase(TestConfiguration testConfiguration, UserRepository userRepository) {
+        return new SaveUserUseCaseImpl(testConfiguration, userRepository);
     }
 
     @Bean

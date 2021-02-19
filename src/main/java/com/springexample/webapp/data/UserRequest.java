@@ -3,17 +3,16 @@ package com.springexample.webapp.data;
 import java.util.Objects;
 
 public class UserRequest {
-    private String name;
+    private String username;
     private String password;
-
     private String address;
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -37,11 +36,11 @@ public class UserRequest {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserRequest that = (UserRequest) o;
-        return Objects.equals(name, that.name) && Objects.equals(password, that.password);
+        return Objects.equals(username, that.username) && Objects.equals(password, that.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, password);
+        return Objects.hash(username, password);
     }
 }

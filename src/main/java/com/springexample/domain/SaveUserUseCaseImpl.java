@@ -4,12 +4,12 @@ import com.springexample.webapp.TestConfiguration;
 
 import java.util.Optional;
 
-public class MyUseCaseImpl implements MyUseCase {
+public class SaveUserUseCaseImpl implements SaveUserUseCase {
 
     private TestConfiguration testConfiguration;
     private UserRepository userRepository;
 
-    public MyUseCaseImpl(
+    public SaveUserUseCaseImpl(
         TestConfiguration testConfiguration,
         UserRepository userRepository
     ) {
@@ -18,7 +18,7 @@ public class MyUseCaseImpl implements MyUseCase {
     }
 
     @Override
-    public boolean authorize(User user) {
+    public boolean save(User user) {
         System.out.println("User: " + user.getName() + " with password: " + user.getPassword());
         Optional<User> fetch = userRepository.fetch(666);
         fetch.ifPresent(value -> System.out.println("Retrieved user: " + value.getName()));
