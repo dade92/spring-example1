@@ -13,7 +13,7 @@ class OrdersController(
     private val saveOrdersUseCase: SaveOrdersUseCase
 ) {
 
-    @PostMapping("saveOrder")
+    @PostMapping("/saveOrder")
     fun saveOrder(@RequestBody saveOrderRequest: SaveOrderRequest): ResponseEntity<Any> =
         saveOrdersUseCase.execute(saveOrderRequest.username, Order(saveOrderRequest.type)).fold(
             {
