@@ -3,6 +3,7 @@ package com.springexample.webapp
 import arrow.core.Left
 import arrow.core.Right
 import com.springexample.domain.Order
+import com.springexample.domain.OrdersStoreError
 import com.springexample.domain.SaveOrdersUseCase
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -47,7 +48,7 @@ class OrdersControllerTest {
     @Test
     fun `create order fails`() {
         `when`(saveOrdersUseCase.execute("davide", Order("chair")))
-            .thenReturn(Left(RuntimeException()))
+            .thenReturn(Left(OrdersStoreError.UserNotExistingError))
 
         mvc.perform(
             post("/saveOrder")
