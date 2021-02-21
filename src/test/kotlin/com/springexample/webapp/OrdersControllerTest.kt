@@ -40,7 +40,7 @@ class OrdersControllerTest {
                 .content(
                     "{\n" +
                             "    \"username\": \"davide\",\n" +
-                            "    \"type\": \"chair\"\n" +
+                            "    \"order\": {\"type\": \"chair\"}\n" +
                             "}"
                 )
                 .contentType(MediaType.APPLICATION_JSON)
@@ -57,7 +57,8 @@ class OrdersControllerTest {
                 .content(
                     "{\n" +
                             "    \"username\": \"davide\",\n" +
-                            "    \"type\": \"chair\"\n" +
+                            "    \"order\": {" +
+                            "    \"type\": \"chair\"}\n" +
                             "}"
                 )
                 .contentType(MediaType.APPLICATION_JSON)
