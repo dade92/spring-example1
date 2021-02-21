@@ -37,12 +37,14 @@ class OrdersControllerTest {
 
         mvc.perform(
             post("/saveOrder")
-                .content(
-                    "{\n" +
-                            "    \"username\": \"davide\",\n" +
-                            "    \"order\": {\"type\": \"chair\"}\n" +
-                            "}"
-                )
+                .content("""
+                    {
+                        "username": "davide",
+                        "order": {
+                            "type": "chair"
+                        }
+                    }
+                """.trimIndent())
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(MockMvcResultMatchers.status().isOk)
     }
@@ -54,13 +56,14 @@ class OrdersControllerTest {
 
         mvc.perform(
             post("/saveOrder")
-                .content(
-                    "{\n" +
-                            "    \"username\": \"davide\",\n" +
-                            "    \"order\": {" +
-                            "    \"type\": \"chair\"}\n" +
-                            "}"
-                )
+                .content("""
+                    {
+                        "username": "davide",
+                        "order": {
+                            "type": "chair"
+                        }
+                    }
+                """.trimIndent())
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(MockMvcResultMatchers.status().isInternalServerError)
     }
