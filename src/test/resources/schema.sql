@@ -6,3 +6,10 @@ CREATE TABLE USERS
     PASSWORD varchar(255),
     ADDRESS varchar(255)
 );
+
+CREATE TABLE ORDERS
+(
+    ID int PRIMARY KEY AUTO_INCREMENT,
+    TYPE varchar(255),
+    USER_ID int
+)
