@@ -14,8 +14,8 @@ class OrdersController(
 ) {
 
     @PostMapping("saveOrder")
-    fun saveOrder(@RequestBody saveOrderRequest: SaveOrderRequest): ResponseEntity<Any> {
-        return saveOrdersUseCase.execute(saveOrderRequest.username, Order(saveOrderRequest.type)).fold(
+    fun saveOrder(@RequestBody saveOrderRequest: SaveOrderRequest): ResponseEntity<Any> =
+        saveOrdersUseCase.execute(saveOrderRequest.username, Order(saveOrderRequest.type)).fold(
             {
                 ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build()
             },
@@ -23,7 +23,6 @@ class OrdersController(
                 ResponseEntity.ok().build()
             }
         )
-    }
 
 }
 
