@@ -18,6 +18,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import java.lang.RuntimeException
 
+private const val USERNAME = "davide"
+private val AN_ORDER = Order("chair")
+
 @RunWith(SpringRunner::class)
 @WebMvcTest(OrdersController::class)
 class OrdersControllerTest {
@@ -30,7 +33,7 @@ class OrdersControllerTest {
 
     @Test
     fun `create an order associated to a user`() {
-        `when`(saveOrdersUseCase.execute("davide", Order("chair")))
+        `when`(saveOrdersUseCase.execute(USERNAME, AN_ORDER))
             .thenReturn(Right(Unit))
 
         mvc.perform(
@@ -38,7 +41,7 @@ class OrdersControllerTest {
                 .content(
                     "{\n" +
                             "    \"username\": \"davide\",\n" +
-                            "    \"type\": \"chair\"\n"+
+                            "    \"type\": \"chair\"\n" +
                             "}"
                 )
                 .contentType(MediaType.APPLICATION_JSON)
@@ -47,7 +50,7 @@ class OrdersControllerTest {
 
     @Test
     fun `create order fails`() {
-        `when`(saveOrdersUseCase.execute("davide", Order("chair")))
+        `when`(saveOrdersUseCase.execute(USERNAME, AN_ORDER))
             .thenReturn(Left(OrdersStoreError.UserNotExistingError))
 
         mvc.perform(
@@ -55,7 +58,7 @@ class OrdersControllerTest {
                 .content(
                     "{\n" +
                             "    \"username\": \"davide\",\n" +
-                            "    \"type\": \"chair\"\n"+
+                            "    \"type\": \"chair\"\n" +
                             "}"
                 )
                 .contentType(MediaType.APPLICATION_JSON)
