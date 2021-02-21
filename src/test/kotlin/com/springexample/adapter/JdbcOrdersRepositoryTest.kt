@@ -5,13 +5,12 @@ import arrow.core.Right
 import com.springexample.domain.Order
 import com.springexample.domain.OrdersStoreError
 import org.hamcrest.CoreMatchers.`is`
-import org.junit.Assert.*
+import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType
-import java.lang.RuntimeException
 import java.sql.ResultSet
 
 class JdbcOrdersRepositoryTest {
