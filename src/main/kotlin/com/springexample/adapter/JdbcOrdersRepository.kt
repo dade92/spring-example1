@@ -20,13 +20,13 @@ class JdbcOrdersRepository(
 
     private val logger = LoggerFactory.getLogger(JdbcOrdersRepository::class.java)
 
-    override fun save(order: Order, username: String): Either<OrdersStoreError, Unit> {
-        return try {
+    override fun save(order: Order, username: String): Either<OrdersStoreError, Unit> =
+        try {
             val id = jdbcTemplate.queryForObject(
                 "SELECT ID FROM USERS WHERE USERNAME=?",
                 listOf(username).toTypedArray()
-            ) { resultSet: ResultSet?, _: Int ->
-                resultSet!!.getInt("ID")
+            ) { resultSet: ResultSet, _: Int ->
+                resultSet.getInt("ID")
             }
             jdbcTemplate.update("INSERT INTO ORDERS (TYPE, USER_ID) VALUES (?, ?)", order.type, id)
             Right(Unit)
@@ -34,5 +34,4 @@ class JdbcOrdersRepository(
             logger.error("Cannot save order ", e)
             Left(OrdersStoreError.UserNotExistingError)
         }
-    }
 }
