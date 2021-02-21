@@ -57,7 +57,7 @@ public class UserController {
     }
 
     private User adaptUser(UserRequest userRequest) {
-        return new User(userRequest.getUsername(), userRequest.getPassword(), userRequest.getAddress());
+        return new User(userRequest.username, userRequest.password, userRequest.address);
     }
 
 }
