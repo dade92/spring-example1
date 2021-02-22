@@ -1,37 +1,54 @@
 package com.springexample.webapp;
 
-import com.springexample.domain.MyUseCase;
+import com.springexample.domain.SaveUserUseCase;
+import com.springexample.domain.RetrieveUserUseCase;
 import com.springexample.domain.User;
-import com.springexample.webapp.data.Outcome;
-import com.springexample.webapp.data.UserRequest;
-import com.springexample.webapp.data.UserResponse;
+import com.springexample.webapp.data.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
-    private final MyUseCase myUseCase;
+    private final SaveUserUseCase saveUserUseCase;
+    private final RetrieveUserUseCase retrieveUserUseCase;
 
     public UserController(
-        MyUseCase myUseCase
+        SaveUserUseCase saveUserUseCase,
+        RetrieveUserUseCase retrieveUserUseCase
     ) {
-        this.myUseCase = myUseCase;
+        this.saveUserUseCase = saveUserUseCase;
+        this.retrieveUserUseCase = retrieveUserUseCase;
     }
 
-    @GetMapping("hello")
-    public ResponseEntity<Object> hello() {
-        myUseCase.operation();
-        return ResponseEntity.noContent().build();
+    @GetMapping("/{userId}")
+    public ResponseEntity<RetrieveUserResponse> retrieve(@PathVariable long userId) {
+        Optional<User> user = retrieveUserUseCase.retrieve(userId);
+        return user.map(value -> ResponseEntity.ok(
+            new RetrieveUserResponse(
+                value.getName(),
+                value.getAddress()
+            ))).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
-    @PostMapping("user")
-    public ResponseEntity<UserResponse> user(@RequestBody UserRequest userRequest) {
-        boolean result = myUseCase.authorize(adaptUser(userRequest));
+    @GetMapping
+    public ResponseEntity<RetrieveUserResponse> retrieve(@RequestParam String username) {
+        Optional<User> user = retrieveUserUseCase.retrieveByUsername(username);
+        return user.map(value -> ResponseEntity.ok(
+            new RetrieveUserResponse(
+                value.getName(),
+                value.getAddress()
+            ))).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
+    @PostMapping("/save")
+    public ResponseEntity<UserResponse> save(@RequestBody UserRequest userRequest) {
+        boolean result = saveUserUseCase.save(adaptUser(userRequest));
+
         if (result) {
             return ResponseEntity.ok(new UserResponse(Outcome.OK));
         } else {
@@ -40,7 +57,7 @@ public class UserController {
     }
 
     private User adaptUser(UserRequest userRequest) {
-        return new User(userRequest.getName(), userRequest.getPassword());
+        return new User(userRequest.username, userRequest.password, userRequest.address);
     }
 
 }

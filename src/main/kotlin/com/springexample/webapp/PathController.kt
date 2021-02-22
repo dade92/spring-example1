@@ -1,6 +1,5 @@
 package com.springexample.webapp
 
-import arrow.core.flatMap
 import com.springexample.domain.PathId
 import com.springexample.domain.PathUseCase
 import org.springframework.http.HttpStatus

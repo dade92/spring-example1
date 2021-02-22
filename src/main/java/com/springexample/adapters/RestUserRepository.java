@@ -58,7 +58,12 @@ public class RestUserRepository implements UserRepository {
         }
     }
 
+    @Override
+    public Optional<User> fetchByUsername(String username) {
+        return Optional.empty();
+    }
+
     private User adaptUser(RestUser user) {
-        return new User(user.getUsername(), user.getPassword());
+        return new User(user.getUsername(), user.getPassword(), "address");
     }
 }
