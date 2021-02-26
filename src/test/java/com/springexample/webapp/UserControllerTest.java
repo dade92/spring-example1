@@ -3,6 +3,7 @@ package com.springexample.webapp;
 import com.springexample.domain.SaveUserUseCase;
 import com.springexample.domain.RetrieveUserUseCase;
 import com.springexample.domain.User;
+import com.springexample.utils.Fixtures;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(UserController.class)
 public class UserControllerTest {
 
+    public static final String SAVE_USER_REQUEST = Fixtures.Companion.readJson("/saveUserRequest.json");
+    public static final String SAVE_USER_RESPONSE = Fixtures.Companion.readJson("/saveUserResponse.json");
+    public static final String RETRIEVE_USER_RESPONSE = Fixtures.Companion.readJson("/retrieveUserResponse.json");
+
     @Autowired
     private MockMvc mvc;
 
@@ -46,7 +51,7 @@ public class UserControllerTest {
         mvc.perform(get("/user/123")
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
-            .andExpect(content().json("{username:\"davide\", address: \"via verdi\"}"));
+            .andExpect(content().json(RETRIEVE_USER_RESPONSE));
 
         verify(retrieveUserUseCase).retrieve(123);
     }
@@ -76,7 +81,7 @@ public class UserControllerTest {
         mvc.perform(get("/user?username=davide")
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
-            .andExpect(content().json("{username:\"davide\", address: \"via verdi\"}"));
+            .andExpect(content().json(RETRIEVE_USER_RESPONSE));
 
         verify(retrieveUserUseCase).retrieveByUsername(username);
     }
@@ -101,14 +106,10 @@ public class UserControllerTest {
         when(saveUserUseCase.save(user)).thenReturn(true);
 
         mvc.perform(post("/user/save")
-            .content("{\n" +
-                "    \"username\": \"davide\",\n" +
-                "    \"password\": \"testPassword\",\n" +
-                "    \"address\": \"via vai\"\n" +
-                "}")
+            .content(SAVE_USER_REQUEST)
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
-            .andExpect(content().json("{\"result\": \"OK\"}"));
+            .andExpect(content().json(SAVE_USER_RESPONSE));
     }
 
     @Test
@@ -118,11 +119,7 @@ public class UserControllerTest {
         when(saveUserUseCase.save(user)).thenReturn(false);
 
         mvc.perform(post("/user/save")
-            .content("{\n" +
-                "    \"username\": \"davide\",\n" +
-                "    \"password\": \"testPassword\",\n" +
-                "    \"address\": \"via vai\"\n" +
-                "}")
+            .content(SAVE_USER_REQUEST)
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isInternalServerError());
     }

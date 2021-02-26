@@ -5,6 +5,7 @@ import arrow.core.Right
 import com.springexample.domain.Order
 import com.springexample.domain.OrdersStoreError
 import com.springexample.domain.SaveOrdersUseCase
+import com.springexample.utils.Fixtures
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.`when`
@@ -24,6 +25,8 @@ private val AN_ORDER = Order("chair")
 @WebMvcTest(OrdersController::class)
 class OrdersControllerTest {
 
+    private val SAVE_ORDER_REQUEST = Fixtures.readJson("/saveOrderRequest.json")
+
     @Autowired
     private lateinit var mvc: MockMvc
 
@@ -37,14 +40,7 @@ class OrdersControllerTest {
 
         mvc.perform(
             post("/saveOrder")
-                .content("""
-                    {
-                        "username": "davide",
-                        "order": {
-                            "type": "chair"
-                        }
-                    }
-                """.trimIndent())
+                .content(SAVE_ORDER_REQUEST)
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(MockMvcResultMatchers.status().isOk)
     }
@@ -56,14 +52,7 @@ class OrdersControllerTest {
 
         mvc.perform(
             post("/saveOrder")
-                .content("""
-                    {
-                        "username": "davide",
-                        "order": {
-                            "type": "chair"
-                        }
-                    }
-                """.trimIndent())
+                .content(SAVE_ORDER_REQUEST)
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(MockMvcResultMatchers.status().isInternalServerError)
     }

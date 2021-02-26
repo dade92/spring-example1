@@ -2,6 +2,7 @@ package com.springexample.adapters;
 
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import com.springexample.domain.User;
+import com.springexample.utils.Fixtures;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -15,6 +16,9 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class RestUserRepositoryTest {
+
+    public static final String ADD_USER_REST_REQUEST = Fixtures.Companion.readJson("/addUserRestRequest.json");
+    public static final String FETCH_USER_RESPONSE = Fixtures.Companion.readJson("/fetchUserResponse.json");
 
     @Rule
     public WireMockRule wireMockRule = new WireMockRule(8089);
@@ -32,7 +36,7 @@ public class RestUserRepositoryTest {
     @Test
     public void fetch() {
         stubFor(get(urlEqualTo("/user/666"))
-            .willReturn(okJson("{\"user\":{\"id\": 666, \"username\":\"Davide\", \"password\":\"XXX\"}}")));
+            .willReturn(okJson(FETCH_USER_RESPONSE)));
 
         Optional<User> user = restUserRepository.fetch(666L);
 
@@ -58,7 +62,7 @@ public class RestUserRepositoryTest {
     @Test
     public void addUserSuccessfully() {
         stubFor(post(urlEqualTo("/addUser"))
-            .withRequestBody(equalToJson("{\"username\":\"Davide\", \"password\":\"XXX\"}"))
+            .withRequestBody(equalToJson(ADD_USER_REST_REQUEST))
             .willReturn(ok()));
 
         Optional<Boolean> result = restUserRepository.addUser(new User("Davide", "XXX", "address"));
@@ -69,7 +73,7 @@ public class RestUserRepositoryTest {
     @Test
     public void addUserFailsWith4xx() {
         stubFor(post(urlEqualTo("/addUser"))
-            .withRequestBody(equalToJson("{\"username\":\"Davide\", \"password\":\"XXX\"}"))
+            .withRequestBody(equalToJson(ADD_USER_REST_REQUEST))
             .willReturn(status(400)));
 
         Optional<Boolean> result = restUserRepository.addUser(new User("Davide", "XXX", "address"));
@@ -80,7 +84,7 @@ public class RestUserRepositoryTest {
     @Test
     public void addUserFailsWith5xx() {
         stubFor(post(urlEqualTo("/addUser"))
-            .withRequestBody(equalToJson("{\"username\":\"Davide\", \"password\":\"XXX\"}"))
+            .withRequestBody(equalToJson(ADD_USER_REST_REQUEST))
             .willReturn(status(500)));
 
         Optional<Boolean> result = restUserRepository.addUser(new User("Davide", "XXX", "address"));
