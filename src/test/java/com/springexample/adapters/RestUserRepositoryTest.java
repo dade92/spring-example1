@@ -19,6 +19,7 @@ public class RestUserRepositoryTest {
 
     public static final String ADD_USER_REST_REQUEST = Fixtures.Companion.readJson("/addUserRestRequest.json");
     public static final String FETCH_USER_RESPONSE = Fixtures.Companion.readJson("/fetchUserResponse.json");
+
     @Rule
     public WireMockRule wireMockRule = new WireMockRule(8089);
 
