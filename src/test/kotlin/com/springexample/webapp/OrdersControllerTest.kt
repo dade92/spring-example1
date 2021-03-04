@@ -20,12 +20,11 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 
 private const val USERNAME = "davide"
 private val AN_ORDER = Order("chair")
+private val SAVE_ORDER_REQUEST = Fixtures.readJson("/saveOrderRequest.json")
 
 @RunWith(SpringRunner::class)
 @WebMvcTest(OrdersController::class)
 class OrdersControllerTest {
-
-    private val SAVE_ORDER_REQUEST = Fixtures.readJson("/saveOrderRequest.json")
 
     @Autowired
     private lateinit var mvc: MockMvc
