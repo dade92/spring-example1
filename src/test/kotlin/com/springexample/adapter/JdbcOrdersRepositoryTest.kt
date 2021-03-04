@@ -2,9 +2,7 @@ package com.springexample.adapter
 
 import arrow.core.Left
 import arrow.core.Right
-import com.springexample.domain.JdbcOrdersRepository
 import com.springexample.domain.Order
-import com.springexample.domain.OrdersStoreError
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Assert.assertThat
 import org.junit.Before

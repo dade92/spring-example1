@@ -3,7 +3,7 @@ package com.springexample.webapp
 import arrow.core.Left
 import arrow.core.Right
 import com.springexample.domain.Order
-import com.springexample.domain.OrdersStoreError
+import com.springexample.adapter.OrdersStoreError
 import com.springexample.domain.SaveOrdersUseCase
 import com.springexample.utils.Fixtures
 import org.junit.Test
@@ -20,12 +20,11 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 
 private const val USERNAME = "davide"
 private val AN_ORDER = Order("chair")
+private val SAVE_ORDER_REQUEST = Fixtures.readJson("/saveOrderRequest.json")
 
 @RunWith(SpringRunner::class)
 @WebMvcTest(OrdersController::class)
 class OrdersControllerTest {
-
-    private val SAVE_ORDER_REQUEST = Fixtures.readJson("/saveOrderRequest.json")
 
     @Autowired
     private lateinit var mvc: MockMvc

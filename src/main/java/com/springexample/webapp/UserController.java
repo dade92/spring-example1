@@ -46,8 +46,8 @@ public class UserController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<UserResponse> save(@RequestBody UserRequest userRequest) {
-        boolean result = saveUserUseCase.save(adaptUser(userRequest));
+    public ResponseEntity<UserResponse> save(@RequestBody SaveUserRequest saveUserRequest) {
+        boolean result = saveUserUseCase.save(adaptUser(saveUserRequest));
 
         if (result) {
             return ResponseEntity.ok(new UserResponse(Outcome.OK));
@@ -56,8 +56,8 @@ public class UserController {
         }
     }
 
-    private User adaptUser(UserRequest userRequest) {
-        return new User(userRequest.username, userRequest.password, userRequest.address);
+    private User adaptUser(SaveUserRequest saveUserRequest) {
+        return new User(saveUserRequest.user.username, saveUserRequest.user.password, saveUserRequest.user.address);
     }
 
 }
