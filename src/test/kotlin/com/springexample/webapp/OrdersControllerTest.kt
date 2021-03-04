@@ -3,7 +3,7 @@ package com.springexample.webapp
 import arrow.core.Left
 import arrow.core.Right
 import com.springexample.domain.Order
-import com.springexample.domain.OrdersStoreError
+import com.springexample.adapter.OrdersStoreError
 import com.springexample.domain.SaveOrdersUseCase
 import com.springexample.utils.Fixtures
 import org.junit.Test
