@@ -11,5 +11,6 @@ CREATE TABLE ORDERS
 (
     ID int PRIMARY KEY AUTO_INCREMENT,
     TYPE varchar(255),
-    USER_ID int
+    USER_ID int,
+    INSERTION_TIME date
 )

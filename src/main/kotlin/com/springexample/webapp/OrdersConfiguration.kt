@@ -19,7 +19,8 @@ open class OrdersConfiguration {
 
     @Bean
     open fun ordersRepository(appJdbcTemplate: JdbcTemplate): OrdersRepository = JdbcOrdersRepository(
-        appJdbcTemplate
+        appJdbcTemplate,
+        NowDateTimeProvider()
     )
 
 }
