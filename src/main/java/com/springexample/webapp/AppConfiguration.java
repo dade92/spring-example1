@@ -13,7 +13,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableConfigurationProperties(
-    {TestConfiguration.class, DbConfiguration.class}
+    {DbConfiguration.class}
 )
 public class AppConfiguration {
 
@@ -23,7 +23,7 @@ public class AppConfiguration {
     }
 
     @Bean
-    public SaveUserUseCase saveUserUseCase(TestConfiguration testConfiguration, UserRepository userRepository) {
+    public SaveUserUseCase saveUserUseCase(UserRepository userRepository) {
         return new DefaultSaveUserUseCase(userRepository);
     }
 
