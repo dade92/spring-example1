@@ -4,6 +4,7 @@ import arrow.core.Left
 import arrow.core.Right
 import com.springexample.domain.DateTimeProvider
 import com.springexample.domain.Order
+import com.springexample.domain.OrdersStoreError
 import org.hamcrest.CoreMatchers.`is`
 import org.jmock.AbstractExpectations.returnValue
 import org.jmock.Expectations

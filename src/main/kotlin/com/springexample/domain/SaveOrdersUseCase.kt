@@ -1,7 +1,6 @@
 package com.springexample.domain
 
 import arrow.core.Either
-import com.springexample.adapter.OrdersStoreError
 
 interface SaveOrdersUseCase {
     fun execute(username: String, order: Order): Either<OrdersStoreError, Unit>
