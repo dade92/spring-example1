@@ -36,7 +36,8 @@ class JdbcOrdersRepositoryTest {
     @Before
     fun setUp() {
         jdbcTemplate = JdbcTemplate(
-            EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2)
+            EmbeddedDatabaseBuilder()
+                .setType(EmbeddedDatabaseType.H2)
                 .addScript("classpath:schema.sql")
                 .build()
         )
