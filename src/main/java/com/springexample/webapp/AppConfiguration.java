@@ -28,7 +28,6 @@ public class AppConfiguration {
     }
 
     @Bean
-    @Primary
     public DataSource appDataSource(
         DbConfiguration dbConfiguration
     ) {
