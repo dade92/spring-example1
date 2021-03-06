@@ -21,7 +21,8 @@ public class JdbcUserRepositoryTest {
     @Before
     public void setUp() {
         jdbcTemplate = new JdbcTemplate(
-            new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2)
+            new EmbeddedDatabaseBuilder()
+                .setType(EmbeddedDatabaseType.H2)
                 .addScript("classpath:schema.sql")
                 .build()
         );
