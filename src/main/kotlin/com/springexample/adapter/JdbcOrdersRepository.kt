@@ -8,7 +8,6 @@ import com.springexample.domain.Order
 import com.springexample.domain.OrdersRepository
 import org.slf4j.LoggerFactory
 import org.springframework.jdbc.core.JdbcTemplate
-import java.security.PrivateKey
 import java.sql.ResultSet
 
 class JdbcOrdersRepository(
