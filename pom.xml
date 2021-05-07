@@ -100,6 +100,11 @@
             <version>${jmock-junit4.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.myprojects</groupId>
+            <artifactId>logger</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
