@@ -17,5 +17,11 @@ pipeline {
                 sh 'echo y | docker image prune'
             }
         }
+        stage('Publish docker image') {
+            steps {
+                sh 'docker image tag spring-example1 davide92/example:latest'
+                sh 'docker push davide92/example'
+            }
+        }
     }
 }
