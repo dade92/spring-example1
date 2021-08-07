@@ -15,6 +15,9 @@ open class OrdersConfiguration {
     )
 
     @Bean
+    open fun retrieveOrdersUseCase(): RetrieveOrdersUseCase = DefaultRetrieveOrdersUseCase()
+
+    @Bean
     open fun ordersRepository(appJdbcTemplate: JdbcTemplate): OrdersRepository = JdbcOrdersRepository(
         appJdbcTemplate,
         NowDateTimeProvider()
