@@ -4,7 +4,7 @@ import arrow.core.Left
 import arrow.core.Right
 import com.springexample.domain.DateTimeProvider
 import com.springexample.domain.Order
-import com.springexample.domain.OrdersStoreError
+import com.springexample.domain.OrdersRepositoryError
 import org.hamcrest.CoreMatchers.`is`
 import org.jmock.AbstractExpectations.returnValue
 import org.jmock.Expectations
@@ -67,7 +67,7 @@ class JdbcOrdersRepositoryTest {
         })
         val result = jdbcOrdersRepository.save(Order("chair"), "davide")
 
-        assertThat(result, `is`(Left(OrdersStoreError.UserNotExistingError)))
+        assertThat(result, `is`(Left(OrdersRepositoryError.UserNotExistingError)))
     }
 
     private fun fetchRow(): Order {

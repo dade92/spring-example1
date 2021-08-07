@@ -3,15 +3,13 @@ package com.springexample.domain
 import arrow.core.Either
 
 interface RetrieveOrdersUseCase {
-    fun retrieve(username: String): Either<RetrieveOrdersErrors.RetrieveError, List<Order>>
+    fun retrieve(username: String): Either<OrdersRepositoryError, List<Order>>
 }
 
-class DefaultRetrieveOrdersUseCase: RetrieveOrdersUseCase {
-    override fun retrieve(username: String): Either<RetrieveOrdersErrors.RetrieveError, List<Order>> {
-        TODO("Not yet implemented")
+class DefaultRetrieveOrdersUseCase(
+    private val ordersRepository: OrdersRepository
+): RetrieveOrdersUseCase {
+    override fun retrieve(username: String): Either<OrdersRepositoryError, List<Order>> {
+        return ordersRepository.retrieve(username)
     }
-}
-
-sealed class RetrieveOrdersErrors {
-    object RetrieveError: RetrieveOrdersErrors()
 }

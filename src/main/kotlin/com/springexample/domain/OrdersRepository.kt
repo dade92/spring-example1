@@ -3,9 +3,11 @@ package com.springexample.domain
 import arrow.core.Either
 
 interface OrdersRepository {
-    fun save(order: Order, username: String): Either<OrdersStoreError, Unit>
+    fun save(order: Order, username: String): Either<OrdersRepositoryError, Unit>
+    fun retrieve(username: String): Either<OrdersRepositoryError, List<Order>>
 }
 
-sealed class OrdersStoreError {
-    object UserNotExistingError : OrdersStoreError()
+sealed class OrdersRepositoryError {
+    object UserNotExistingError : OrdersRepositoryError()
+    object RetrieveError: OrdersRepositoryError()
 }

@@ -50,7 +50,7 @@ class OrdersControllerTest {
     @Test
     fun `create order fails`() {
         `when`(saveOrdersUseCase.execute(USERNAME, AN_ORDER))
-            .thenReturn(Left(OrdersStoreError.UserNotExistingError))
+            .thenReturn(Left(OrdersRepositoryError.UserNotExistingError))
 
         mvc.perform(
             post("/saveOrder")
@@ -74,7 +74,7 @@ class OrdersControllerTest {
     @Test
     fun `retrieve orders fails`() {
         `when`(retrieveOrdersUseCase.retrieve("Davide"))
-            .thenReturn(Left(RetrieveOrdersErrors.RetrieveError))
+            .thenReturn(Left(OrdersRepositoryError.RetrieveError))
 
         mvc.perform(
             get("/retrieveOrders?user=Davide")

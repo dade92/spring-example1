@@ -15,7 +15,7 @@ open class OrdersConfiguration {
     )
 
     @Bean
-    open fun retrieveOrdersUseCase(): RetrieveOrdersUseCase = DefaultRetrieveOrdersUseCase()
+    open fun retrieveOrdersUseCase(ordersRepository: OrdersRepository): RetrieveOrdersUseCase = DefaultRetrieveOrdersUseCase(ordersRepository)
 
     @Bean
     open fun ordersRepository(appJdbcTemplate: JdbcTemplate): OrdersRepository = JdbcOrdersRepository(

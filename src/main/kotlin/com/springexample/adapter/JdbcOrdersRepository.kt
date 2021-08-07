@@ -6,7 +6,7 @@ import arrow.core.Right
 import com.springexample.domain.DateTimeProvider
 import com.springexample.domain.Order
 import com.springexample.domain.OrdersRepository
-import com.springexample.domain.OrdersStoreError
+import com.springexample.domain.OrdersRepositoryError
 import org.slf4j.LoggerFactory
 import org.springframework.jdbc.core.JdbcTemplate
 import java.sql.ResultSet
@@ -18,7 +18,7 @@ class JdbcOrdersRepository(
 
     private val logger = LoggerFactory.getLogger(JdbcOrdersRepository::class.java)
 
-    override fun save(order: Order, username: String): Either<OrdersStoreError, Unit> =
+    override fun save(order: Order, username: String): Either<OrdersRepositoryError, Unit> =
         try {
             val id = jdbcTemplate.queryForObject(
                 "SELECT ID FROM USERS WHERE USERNAME=?",
@@ -35,6 +35,10 @@ class JdbcOrdersRepository(
             Right(Unit)
         } catch (e: Exception) {
             logger.error("Cannot save order ", e)
-            Left(OrdersStoreError.UserNotExistingError)
+            Left(OrdersRepositoryError.UserNotExistingError)
         }
+
+    override fun retrieve(username: String): Either<OrdersRepositoryError, List<Order>> {
+        TODO("Not yet implemented")
+    }
 }
