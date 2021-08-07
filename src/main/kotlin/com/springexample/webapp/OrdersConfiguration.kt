@@ -10,9 +10,6 @@ import org.springframework.jdbc.core.JdbcTemplate
 open class OrdersConfiguration {
 
     @Bean
-    open fun pathUseCase(): PathUseCase = PathUseCaseImpl()
-
-    @Bean
     open fun saveOrdersUseCase(ordersRepository: OrdersRepository): SaveOrdersUseCase = DefaultSaveOrdersUseCase(
         ordersRepository
     )
