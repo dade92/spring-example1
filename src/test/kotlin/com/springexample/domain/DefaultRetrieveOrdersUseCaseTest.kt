@@ -21,7 +21,7 @@ class DefaultRetrieveOrdersUseCaseTest {
     @Mock
     private lateinit var ordersRepository: OrdersRepository
 
-    private lateinit var defaultRetrieveOrdersUseCase : DefaultRetrieveOrdersUseCase
+    private lateinit var defaultRetrieveOrdersUseCase: DefaultRetrieveOrdersUseCase
 
     @Before
     fun setUp() {

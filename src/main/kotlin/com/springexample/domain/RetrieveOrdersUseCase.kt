@@ -8,8 +8,7 @@ interface RetrieveOrdersUseCase {
 
 class DefaultRetrieveOrdersUseCase(
     private val ordersRepository: OrdersRepository
-): RetrieveOrdersUseCase {
-    override fun retrieve(username: String): Either<OrdersRepositoryError, List<Order>> {
-        return ordersRepository.retrieve(username)
-    }
+) : RetrieveOrdersUseCase {
+    override fun retrieve(username: String): Either<OrdersRepositoryError, List<Order>> =
+        ordersRepository.retrieve(username)
 }
