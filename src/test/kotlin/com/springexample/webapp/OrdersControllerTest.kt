@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 
 private const val USERNAME = "davide"
 private val AN_ORDER = Order("chair")
@@ -67,6 +68,7 @@ class OrdersControllerTest {
             get("/retrieveOrders?user=Davide")
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(MockMvcResultMatchers.status().isOk)
+            .andExpect(content().json(Fixtures.readJson("/retrieveOrders.json")))
     }
 
     @Test

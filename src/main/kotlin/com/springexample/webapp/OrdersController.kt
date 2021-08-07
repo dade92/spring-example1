@@ -25,18 +25,17 @@ class OrdersController(
         )
 
     @GetMapping("/retrieveOrders")
-    fun retrieveOrders(
-        @RequestParam user: String
-    ): ResponseEntity<Any> {
+    fun retrieveOrders(@RequestParam user: String): ResponseEntity<RetrieveOrdersResponse> =
         retrieveOrdersUseCase.retrieve(user).fold(
             {
-                return ResponseEntity.notFound().build()
+                ResponseEntity.notFound().build()
             },
             {
-                return ResponseEntity.ok().build()
+                ResponseEntity.ok(adaptResponse(it))
             }
         )
-    }
+
+    private fun adaptResponse(orders: List<Order>): RetrieveOrdersResponse = RetrieveOrdersResponse(orders)
 
     private fun adaptOrder(saveOrderRequest: SaveOrderRequest) = Order(saveOrderRequest.order.type)
 
@@ -49,4 +48,8 @@ data class SaveOrderRequest(
 
 data class SaveOrder(
     val type: String
+)
+
+data class RetrieveOrdersResponse(
+    val orders: List<Order>
 )
