@@ -20,12 +20,7 @@ class JdbcOrdersRepository(
 
     override fun save(order: Order, username: String): Either<OrdersRepositoryError, Unit> =
         try {
-            val id = jdbcTemplate.queryForObject(
-                "SELECT ID FROM USERS WHERE USERNAME=?",
-                listOf(username).toTypedArray()
-            ) { resultSet: ResultSet, _: Int ->
-                resultSet.getInt("ID")
-            }
+            val id = retrieveUserByUsername(username)
             jdbcTemplate.update(
                 "INSERT INTO ORDERS (TYPE, USER_ID, INSERTION_TIME) VALUES (?, ?, ?)",
                 order.type,
@@ -38,22 +33,23 @@ class JdbcOrdersRepository(
             Left(OrdersRepositoryError.UserNotExistingError)
         }
 
-    override fun retrieve(username: String): Either<OrdersRepositoryError, List<Order>> {
+    override fun retrieve(username: String): Either<OrdersRepositoryError, List<Order>> =
         try {
-            val id = jdbcTemplate.queryForObject(
-                "SELECT ID FROM USERS WHERE USERNAME=?",
-                listOf(username).toTypedArray()
-            ) { resultSet: ResultSet, _: Int ->
-                resultSet.getInt("ID")
-            }
-            return Right(jdbcTemplate.query(
+            val id = retrieveUserByUsername(username)
+            Right(jdbcTemplate.query(
                 "SELECT * FROM ORDERS WHERE USER_ID=?",
                 listOf(id).toTypedArray()
             ) { resultSet: ResultSet, _: Int ->
                 Order(resultSet.getString("TYPE"))
             })
         } catch (e: Exception) {
-            return Left(OrdersRepositoryError.RetrieveError)
+            Left(OrdersRepositoryError.RetrieveError)
         }
+
+    private fun retrieveUserByUsername(username: String) = jdbcTemplate.queryForObject(
+        "SELECT ID FROM USERS WHERE USERNAME=?",
+        listOf(username).toTypedArray()
+    ) { resultSet: ResultSet, _: Int ->
+        resultSet.getInt("ID")
     }
 }
