@@ -39,6 +39,21 @@ class JdbcOrdersRepository(
         }
 
     override fun retrieve(username: String): Either<OrdersRepositoryError, List<Order>> {
-        TODO("Not yet implemented")
+        try {
+            val id = jdbcTemplate.queryForObject(
+                "SELECT ID FROM USERS WHERE USERNAME=?",
+                listOf(username).toTypedArray()
+            ) { resultSet: ResultSet, _: Int ->
+                resultSet.getInt("ID")
+            }
+            return Right(jdbcTemplate.query(
+                "SELECT * FROM ORDERS WHERE USER_ID=?",
+                listOf(id).toTypedArray()
+            ) { resultSet: ResultSet, _: Int ->
+                Order(resultSet.getString("TYPE"))
+            })
+        } catch (e: Exception) {
+            return Left(OrdersRepositoryError.RetrieveError)
+        }
     }
 }
