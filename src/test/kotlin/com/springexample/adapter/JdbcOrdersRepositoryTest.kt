@@ -4,12 +4,13 @@ import arrow.core.Left
 import arrow.core.Right
 import com.springexample.domain.DateTimeProvider
 import com.springexample.domain.Order
-import com.springexample.domain.OrdersStoreError
+import com.springexample.domain.OrdersRepositoryError
 import org.hamcrest.CoreMatchers.`is`
 import org.jmock.AbstractExpectations.returnValue
 import org.jmock.Expectations
 import org.jmock.auto.Mock
 import org.jmock.integration.junit4.JUnitRuleMockery
+import org.junit.Assert
 import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Rule
@@ -19,6 +20,8 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType
 import java.sql.ResultSet
 import java.time.LocalDateTime
+
+private val NOW = LocalDateTime.of(2021, 3, 6, 0, 0, 0)
 
 class JdbcOrdersRepositoryTest {
 
@@ -49,7 +52,7 @@ class JdbcOrdersRepositoryTest {
     fun `adds order for a user`() {
         context.checking(Expectations().apply {
             oneOf(dateTimeProvider).get()
-            will(returnValue(LocalDateTime.of(2021, 3, 6, 0, 0, 0)))
+            will(returnValue(NOW))
         })
 
         insertUser(666, "davide", "XXX", "via vai")
@@ -67,7 +70,22 @@ class JdbcOrdersRepositoryTest {
         })
         val result = jdbcOrdersRepository.save(Order("chair"), "davide")
 
-        assertThat(result, `is`(Left(OrdersStoreError.UserNotExistingError)))
+        assertThat(result, `is`(Left(OrdersRepositoryError.UserNotExistingError)))
+    }
+
+    @Test
+    fun `retrieve orders for a given user`() {
+        context.checking(Expectations().apply {
+            oneOf(dateTimeProvider).get()
+            will(returnValue(NOW))
+        })
+
+        insertUser(666, "davide", "XXX", "via vai")
+        jdbcOrdersRepository.save(Order("chair"), "davide")
+
+        val result = jdbcOrdersRepository.retrieve("davide")
+
+        assertThat(result, `is`(Right(listOf(Order("chair")))))
     }
 
     private fun fetchRow(): Order {

@@ -1,16 +1,16 @@
 package com.springexample.webapp
 
 import com.springexample.domain.Order
+import com.springexample.domain.RetrieveOrdersUseCase
 import com.springexample.domain.SaveOrdersUseCase
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 class OrdersController(
-    private val saveOrdersUseCase: SaveOrdersUseCase
+    private val saveOrdersUseCase: SaveOrdersUseCase,
+    private val retrieveOrdersUseCase: RetrieveOrdersUseCase
 ) {
 
     @PostMapping("/saveOrder")
@@ -24,6 +24,19 @@ class OrdersController(
             }
         )
 
+    @GetMapping("/retrieveOrders")
+    fun retrieveOrders(@RequestParam user: String): ResponseEntity<RetrieveOrdersResponse> =
+        retrieveOrdersUseCase.retrieve(user).fold(
+            {
+                ResponseEntity.notFound().build()
+            },
+            {
+                ResponseEntity.ok(adaptResponse(it))
+            }
+        )
+
+    private fun adaptResponse(orders: List<Order>): RetrieveOrdersResponse = RetrieveOrdersResponse(orders)
+
     private fun adaptOrder(saveOrderRequest: SaveOrderRequest) = Order(saveOrderRequest.order.type)
 
 }
@@ -35,4 +48,8 @@ data class SaveOrderRequest(
 
 data class SaveOrder(
     val type: String
+)
+
+data class RetrieveOrdersResponse(
+    val orders: List<Order>
 )

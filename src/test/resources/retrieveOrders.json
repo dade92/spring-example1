@@ -1,0 +1,10 @@
+{
+  "orders": [
+    {
+      "type": "chair"
+    },
+    {
+      "type": "car"
+    }
+  ]
+}
