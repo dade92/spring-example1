@@ -9,7 +9,7 @@ services:
   app:
     image: davide92/spring-example1
     depends_on:
-      - "mysqldb"
+      - mysqldb
     restart:
       always
     ports:
