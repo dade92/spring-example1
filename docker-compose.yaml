@@ -1,11 +1,15 @@
 version: '3'
 services:
-  mysql:
+  mysqldb:
     image: davide92/mysql-custom
     ports:
       - 3306:3306
     volumes:
-      - mysql-data:/var/lib/mysql
+      - mysql-test-data:/var/lib/mysql
+  app:
+    image: davide92/spring-example1
+    ports:
+      - 8080:8080
 volumes:
-  mysql-data:
+  mysql-test-data:
     driver: local
