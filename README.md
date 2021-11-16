@@ -4,3 +4,7 @@ and uses different testing techniques, especially for the data layer classes.
 It uses some basic concepts of functional programming (like monads) using arrow kotlin library.
 It contains also a Jenkinsfile to allow continuous integration with jenkins, and 
 a Dockerfile that can be used after the build stage to build a docker image.
+
+**HOW TO RUN**
+
+Run using `docker-compose up` command. This will download from dockerhub the images and run everything.
