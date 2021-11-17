@@ -1,0 +1,19 @@
+version: '3'
+services:
+  mysqldb:
+    image: davide92/mysql-custom
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql-test-data:/var/lib/mysql
+  app:
+    image: davide92/spring-example1
+    depends_on:
+      - mysqldb
+    restart:
+      always
+    ports:
+      - 8080:8080
+volumes:
+  mysql-test-data:
+    driver: local

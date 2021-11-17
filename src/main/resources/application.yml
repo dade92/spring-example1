@@ -3,6 +3,6 @@ spring:
     spring-example:
       url: jdbc:mysql://localhost:3306/spring-example?serverTimezone=UTC
       username: root
-      password: 1191992Da
+      password: password
 test:
   url: myPersonalUrl
