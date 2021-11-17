@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Publish docker image') {
             steps {
-                sh 'docker image tag spring-example1 davide92/example:latest'
+                sh 'docker image tag spring-example1 davide92/spring-example1:latest'
                 sh 'docker push davide92/example'
             }
         }
