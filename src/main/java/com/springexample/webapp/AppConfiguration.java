@@ -1,10 +1,12 @@
 package com.springexample.webapp;
 
+import com.myprojects.domain.Logger;
 import com.springexample.adapters.JdbcUserRepository;
 import com.springexample.domain.*;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,6 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 
 @Configuration
+@ComponentScan("com.myprojects.configuration")
 @EnableConfigurationProperties(
     {DbConfiguration.class}
 )
@@ -44,7 +47,8 @@ public class AppConfiguration {
     }
 
     @Bean
-    public UserRepository userRepository(JdbcTemplate appJdbcTemplate) {
+    public UserRepository userRepository(JdbcTemplate appJdbcTemplate, Logger logger) {
+        logger.info("Starting bean user repository...");
         return new JdbcUserRepository(appJdbcTemplate);
     }
 }
