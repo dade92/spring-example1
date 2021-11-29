@@ -9,8 +9,3 @@ interface RetrieveProductsUseCase {
 sealed class RetrieveProductsError {
     object RestError: RetrieveProductsError()
 }
-
-data class Product(
-    val description: String,
-    val enabled: Boolean = true
-)

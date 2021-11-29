@@ -1,7 +1,9 @@
 package com.springexample.webapp
 
+import arrow.core.Left
 import arrow.core.Right
 import com.springexample.domain.Product
+import com.springexample.domain.RetrieveProductsError
 import com.springexample.domain.RetrieveProductsUseCase
 import com.springexample.utils.Fixtures
 import org.junit.Test
@@ -29,7 +31,7 @@ class ProductsControllerTest {
     private lateinit var retrieveProductsUseCase: RetrieveProductsUseCase
 
     @Test
-    fun `retrieve orders for a given user`() {
+    fun `retrieve products success`() {
         `when`(retrieveProductsUseCase.execute())
             .thenReturn(Right(listOf(Product("a description", true))))
 
@@ -38,5 +40,16 @@ class ProductsControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(content().json(Fixtures.readJson("/retrieveProducts.json")))
+    }
+
+    @Test
+    fun `retrieve products fails`() {
+        `when`(retrieveProductsUseCase.execute())
+            .thenReturn(Left(RetrieveProductsError.RestError))
+
+        mvc.perform(
+            get("/products")
+                .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(MockMvcResultMatchers.status().isInternalServerError)
     }
 }
