@@ -6,3 +6,6 @@ spring:
       password: password
 test:
   url: myPersonalUrl
+
+products:
+  url: http://localhost:8081
