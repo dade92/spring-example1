@@ -1,9 +1,11 @@
 package com.springexample.adapter
 
+import arrow.core.Left
 import arrow.core.Right
 import com.github.tomakehurst.wiremock.client.WireMock
 import com.github.tomakehurst.wiremock.junit.WireMockRule
 import com.springexample.domain.Product
+import com.springexample.domain.RetrieveProductsError
 import com.springexample.utils.Fixtures.Companion.readJson
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Assert
@@ -31,7 +33,7 @@ class RestProductsRepositoryTest {
     }
 
     @Test
-    fun retrieveProducts() {
+    fun `retrieve Products`() {
         WireMock.stubFor(
             WireMock.get(WireMock.urlEqualTo("/products"))
                 .willReturn(WireMock.okJson(FETCH_PRODUCTS_RESPONSE))
@@ -46,5 +48,17 @@ class RestProductsRepositoryTest {
                 Product("Television", true)
             )
         )))
+    }
+
+    @Test
+    fun `retrieve products fails`() {
+        WireMock.stubFor(
+            WireMock.get(WireMock.urlEqualTo("/products"))
+                .willReturn(WireMock.serverError())
+        )
+
+        val result = restProductsRepository.retrieveAll()
+
+        Assert.assertThat(result, `is`(Left(RetrieveProductsError.RestError)))
     }
 }

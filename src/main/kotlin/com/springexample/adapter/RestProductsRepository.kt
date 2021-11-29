@@ -14,12 +14,16 @@ class RestProductsRepository(
     private val client: RestOperations
 ) : ProductsRepository {
     override fun retrieveAll(): Either<RetrieveProductsError, List<Product>> {
-        val result = client.getForEntity(baseUrl + "/products", ProductsResponse::class.java)
+        try {
+            val result = client.getForEntity(baseUrl + "/products", ProductsResponse::class.java)
 
-        return if(result.statusCode==HttpStatus.OK) {
-            Right(result.body.products.map { Product(it.name) })
-        } else {
-            Left(RetrieveProductsError.RestError)
+            return if(result.statusCode==HttpStatus.OK) {
+                Right(result.body.products.map { Product(it.name) })
+            } else {
+                Left(RetrieveProductsError.RestError)
+            }
+        } catch (e: Exception) {
+            return Left(RetrieveProductsError.RestError)
         }
     }
 }
