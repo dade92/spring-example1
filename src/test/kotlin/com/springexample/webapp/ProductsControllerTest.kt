@@ -1,11 +1,11 @@
 package com.springexample.webapp
 
 import arrow.core.Right
-import com.springexample.domain.*
+import com.springexample.domain.Product
+import com.springexample.domain.RetrieveProductsUseCase
 import com.springexample.utils.Fixtures
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
@@ -30,8 +30,8 @@ class ProductsControllerTest {
 
     @Test
     fun `retrieve orders for a given user`() {
-//        `when`(retrieveProductsUseCase.execute())
-//            .thenReturn(Right(listOf(Product("a description", true))))
+        `when`(retrieveProductsUseCase.execute())
+            .thenReturn(Right(listOf(Product("a description", true))))
 
         mvc.perform(
             get("/products")
