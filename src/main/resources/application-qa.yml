@@ -8,4 +8,4 @@ test:
   url: myPersonalUrl
 
 products:
-  url: http://external-catalog:8081
+  url: http://external-catalog:8080
