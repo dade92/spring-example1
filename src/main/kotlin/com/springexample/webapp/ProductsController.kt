@@ -1,6 +1,5 @@
 package com.springexample.webapp
 
-import arrow.core.flatMap
 import com.springexample.domain.Product
 import com.springexample.domain.RetrieveProductsUseCase
 import org.springframework.http.HttpStatus
