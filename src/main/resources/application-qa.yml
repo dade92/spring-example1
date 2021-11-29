@@ -6,3 +6,6 @@ spring:
       password: password
 test:
   url: myPersonalUrl
+
+products:
+  url: http://external-catalog:8081
