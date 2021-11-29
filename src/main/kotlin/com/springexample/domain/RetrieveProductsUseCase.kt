@@ -6,7 +6,9 @@ interface RetrieveProductsUseCase {
     fun execute(): Either<RetrieveProductsError, List<Product>>
 }
 
-sealed class RetrieveProductsError
+sealed class RetrieveProductsError {
+    object RestError: RetrieveProductsError()
+}
 
 data class Product(
     val description: String,
