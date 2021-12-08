@@ -13,15 +13,16 @@ import org.springframework.web.client.RestTemplate
 @EnableConfigurationProperties(
     ProductsProperties::class
 )
-open class ProductsConfiguration {
+class ProductsConfiguration {
+
     @Bean
-    open fun retrieveProductsUseCase(
+    fun retrieveProductsUseCase(
         productsRepository: ProductsRepository
     ): RetrieveProductsUseCase =
         DefaultRetrieveProductsUseCase(productsRepository)
 
     @Bean
-    open fun productsRepository(
+    fun productsRepository(
         productsProperties: ProductsProperties
     ): ProductsRepository =
         RestProductsRepository(productsProperties.url, RestTemplate())
