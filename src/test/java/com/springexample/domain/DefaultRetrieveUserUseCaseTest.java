@@ -1,11 +1,14 @@
 package com.springexample.domain;
 
 import org.jmock.Expectations;
+import org.jmock.Mockery;
 import org.jmock.auto.Mock;
 import org.jmock.integration.junit4.JUnitRuleMockery;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.jmock.junit5.JUnit5Mockery;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+
 
 import java.util.Optional;
 
@@ -14,15 +17,15 @@ import static org.junit.Assert.assertThat;
 
 public class DefaultRetrieveUserUseCaseTest {
 
-    @Rule
-    public JUnitRuleMockery context = new JUnitRuleMockery();
+    @RegisterExtension
+    Mockery context = new JUnit5Mockery();
 
     @Mock
     private UserRepository userRepository;
 
     private DefaultRetrieveUserUseCase defaultRetrieveUserUseCase;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         defaultRetrieveUserUseCase = new DefaultRetrieveUserUseCase(userRepository);
     }
