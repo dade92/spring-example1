@@ -10,11 +10,14 @@ import org.jmock.AbstractExpectations.returnValue
 import org.jmock.Expectations
 import org.jmock.auto.Mock
 import org.jmock.integration.junit4.JUnitRuleMockery
+import org.jmock.junit5.JUnit5Mockery
 import org.junit.Assert
 import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Rule
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.RegisterExtension
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType
@@ -25,9 +28,9 @@ private val NOW = LocalDateTime.of(2021, 3, 6, 0, 0, 0)
 
 class JdbcOrdersRepositoryTest {
 
-    @Rule
+    @RegisterExtension
     @JvmField
-    val context: JUnitRuleMockery = JUnitRuleMockery()
+    val context: JUnit5Mockery = JUnit5Mockery()
 
     private lateinit var jdbcTemplate: JdbcTemplate
 
@@ -36,7 +39,7 @@ class JdbcOrdersRepositoryTest {
     @Mock
     private lateinit var dateTimeProvider: DateTimeProvider
 
-    @Before
+    @BeforeEach
     fun setUp() {
         jdbcTemplate = JdbcTemplate(
             EmbeddedDatabaseBuilder()

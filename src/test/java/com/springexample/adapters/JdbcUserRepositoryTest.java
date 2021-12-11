@@ -1,8 +1,8 @@
 package com.springexample.adapters;
 
 import com.springexample.domain.User;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -18,7 +18,7 @@ public class JdbcUserRepositoryTest {
     private JdbcTemplate jdbcTemplate;
     private JdbcUserRepository jdbcUserRepository;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         jdbcTemplate = new JdbcTemplate(
             new EmbeddedDatabaseBuilder()
