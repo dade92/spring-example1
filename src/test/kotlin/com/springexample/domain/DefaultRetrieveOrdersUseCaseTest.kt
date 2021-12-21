@@ -5,24 +5,24 @@ import org.hamcrest.CoreMatchers.`is`
 import org.jmock.AbstractExpectations.returnValue
 import org.jmock.Expectations
 import org.jmock.auto.Mock
-import org.jmock.integration.junit4.JUnitRuleMockery
-import org.junit.Assert.*
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
+import org.jmock.junit5.JUnit5Mockery
+import org.junit.Assert.assertThat
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.RegisterExtension
 
 class DefaultRetrieveOrdersUseCaseTest {
 
-    @Rule
+    @RegisterExtension
     @JvmField
-    val context = JUnitRuleMockery()
+    val context = JUnit5Mockery()
 
     @Mock
     private lateinit var ordersRepository: OrdersRepository
 
     private lateinit var defaultRetrieveOrdersUseCase: DefaultRetrieveOrdersUseCase
 
-    @Before
+    @BeforeEach
     fun setUp() {
         defaultRetrieveOrdersUseCase = DefaultRetrieveOrdersUseCase(ordersRepository)
     }

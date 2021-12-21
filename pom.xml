@@ -22,15 +22,16 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <kotlin.version>1.4.10</kotlin.version>
+        <kotlin.version>1.6.0</kotlin.version>
         <spring-jdbc.version>5.2.12.RELEASE</spring-jdbc.version>
-        <h2.version>1.4.200</h2.version>
+        <h2.version>2.0.202</h2.version>
         <wiremock-jre8.version>2.27.2</wiremock-jre8.version>
-        <junit.version>4.12</junit.version>
-        <arrow-core.version>0.11.0</arrow-core.version>
-        <slf4j-api.version>1.7.30</slf4j-api.version>
-        <jackson-module-kotlin.version>2.12.0</jackson-module-kotlin.version>
-        <jmock-junit4.version>2.12.0</jmock-junit4.version>
+        <junit.version>4.13</junit.version>
+        <arrow-core.version>0.12.1</arrow-core.version>
+        <slf4j-api.version>1.7.32</slf4j-api.version>
+        <jackson-module-kotlin.version>2.13.0</jackson-module-kotlin.version>
+        <jmock.version>2.12.0</jmock.version>
+        <log4j2.version>2.16.0</log4j2.version>
     </properties>
 
     <dependencies>
@@ -102,9 +103,16 @@
         <dependency>
             <groupId>org.jmock</groupId>
             <artifactId>jmock-junit4</artifactId>
-            <version>${jmock-junit4.version}</version>
+            <version>${jmock.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.jmock</groupId>
+            <artifactId>jmock-junit5</artifactId>
+            <version>${jmock.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
