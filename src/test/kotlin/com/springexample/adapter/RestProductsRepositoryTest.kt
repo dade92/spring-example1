@@ -20,7 +20,7 @@ class RestProductsRepositoryTest {
 
     @RegisterExtension
     @JvmField
-    var wm1: WireMockExtension = WireMockExtension.newInstance()
+    var wiremock: WireMockExtension = WireMockExtension.newInstance()
         .options(wireMockConfig().dynamicPort().dynamicHttpsPort())
         .build()
 
@@ -31,14 +31,14 @@ class RestProductsRepositoryTest {
     @BeforeEach
     fun setUp() {
         restProductsRepository = RestProductsRepository(
-            "http://localhost:" + wm1.runtimeInfo.httpPort,
+            "http://localhost:" + wiremock.runtimeInfo.httpPort,
             RestTemplate()
         )
     }
 
     @Test
     fun `retrieve Products`() {
-        wm1.stubFor(
+        wiremock.stubFor(
             WireMock.get(WireMock.urlEqualTo("/products"))
                 .willReturn(WireMock.okJson(FETCH_PRODUCTS_RESPONSE))
         )
@@ -60,7 +60,7 @@ class RestProductsRepositoryTest {
 
     @Test
     fun `retrieve products fails`() {
-        wm1.stubFor(
+        wiremock.stubFor(
             WireMock.get(WireMock.urlEqualTo("/products"))
                 .willReturn(WireMock.serverError())
         )

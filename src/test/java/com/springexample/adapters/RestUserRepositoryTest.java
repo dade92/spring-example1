@@ -1,10 +1,8 @@
 package com.springexample.adapters;
 
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
 import com.springexample.domain.User;
 import com.springexample.utils.Fixtures;
-import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
@@ -21,29 +19,26 @@ import static org.junit.Assert.assertThat;
 public class RestUserRepositoryTest {
 
     @RegisterExtension
-    static WireMockExtension wm1 = WireMockExtension.newInstance()
+    static WireMockExtension wiremock = WireMockExtension.newInstance()
         .options(wireMockConfig().dynamicPort().dynamicHttpsPort())
         .build();
 
     public static final String ADD_USER_REST_REQUEST = Fixtures.Companion.readJson("/addUserRestRequest.json");
     public static final String FETCH_USER_RESPONSE = Fixtures.Companion.readJson("/fetchUserResponse.json");
 
-    @Rule
-    public WireMockRule wireMockRule = new WireMockRule(8089);
-
     private RestUserRepository restUserRepository;
 
     @BeforeEach
     public void setUp() {
         restUserRepository = new RestUserRepository(
-            "http://localhost:" + wm1.getRuntimeInfo().getHttpPort(),
+            "http://localhost:" + wiremock.getRuntimeInfo().getHttpPort(),
             new RestTemplate()
         );
     }
 
     @Test
     public void fetch() {
-        wm1.stubFor(get(urlEqualTo("/user/666"))
+        wiremock.stubFor(get(urlEqualTo("/user/666"))
             .willReturn(okJson(FETCH_USER_RESPONSE)));
 
         Optional<User> user = restUserRepository.fetch(666L);
@@ -53,7 +48,7 @@ public class RestUserRepositoryTest {
 
     @Test
     public void fetchFailsWith4xx() {
-        wm1.stubFor(get(urlEqualTo("/user/666"))
+        wiremock.stubFor(get(urlEqualTo("/user/666"))
             .willReturn(status(HttpStatus.BAD_REQUEST.value())));
 
         assertThat(restUserRepository.fetch(666L), is(Optional.empty()));
@@ -61,7 +56,7 @@ public class RestUserRepositoryTest {
 
     @Test
     public void fetchFailsWith5xx() {
-        wm1.stubFor(get(urlEqualTo("/user/666"))
+        wiremock.stubFor(get(urlEqualTo("/user/666"))
             .willReturn(status(HttpStatus.INTERNAL_SERVER_ERROR.value())));
 
         assertThat(restUserRepository.fetch(666L), is(Optional.empty()));
@@ -69,7 +64,7 @@ public class RestUserRepositoryTest {
 
     @Test
     public void addUserSuccessfully() {
-        wm1.stubFor(post(urlEqualTo("/addUser"))
+        wiremock.stubFor(post(urlEqualTo("/addUser"))
             .withRequestBody(equalToJson(ADD_USER_REST_REQUEST))
             .willReturn(ok()));
 
@@ -80,7 +75,7 @@ public class RestUserRepositoryTest {
 
     @Test
     public void addUserFailsWith4xx() {
-        wm1.stubFor(post(urlEqualTo("/addUser"))
+        wiremock.stubFor(post(urlEqualTo("/addUser"))
             .withRequestBody(equalToJson(ADD_USER_REST_REQUEST))
             .willReturn(status(400)));
 
@@ -91,7 +86,7 @@ public class RestUserRepositoryTest {
 
     @Test
     public void addUserFailsWith5xx() {
-        wm1.stubFor(post(urlEqualTo("/addUser"))
+        wiremock.stubFor(post(urlEqualTo("/addUser"))
             .withRequestBody(equalToJson(ADD_USER_REST_REQUEST))
             .willReturn(status(500)));
 
