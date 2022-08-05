@@ -22,7 +22,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(UserController.class)
 public class UserControllerTest {
-
     public static final String SAVE_USER_REQUEST = Fixtures.Companion.readJson("/saveUserRequest.json");
     public static final String SAVE_USER_RESPONSE = Fixtures.Companion.readJson("/saveUserResponse.json");
     public static final String RETRIEVE_USER_RESPONSE = Fixtures.Companion.readJson("/retrieveUserResponse.json");
