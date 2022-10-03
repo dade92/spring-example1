@@ -1,0 +1,10 @@
+version: '3'
+services:
+  builder:
+    image: maven:3.6.0-jdk-11-slim
+    command: mvn install
+    working_dir: /usr/src/mymaven
+    volumes:
+      - ${PWD}:/usr/src/mymaven
+      - ${HOME}/.m2:/root/.m2
+      - ${PWD}/target:/usr/src/mymaven/target
