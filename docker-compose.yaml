@@ -3,7 +3,7 @@ services:
   mysqldb:
     image: davide92/mysql-custom
     ports:
-      - 3306:3306
+      - "3306:3306"
     volumes:
       - mysql-test-data:/var/lib/mysql
   app:
@@ -13,7 +13,7 @@ services:
     restart:
       always
     ports:
-      - 8080:8080
+      - "8080:8080"
   external-catalog:
     image: davide92/external-catalog
 volumes:
