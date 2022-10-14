@@ -8,7 +8,7 @@ a Dockerfile that can be used after the build stage to build a docker image.
 **HOW TO BUILD**
 
 You can build inside a docker container 
-by typing: `docker compose -f docker-compose-build.yml up` or simply using maven locally
+by using the .sh script typing: `./build.sh` or simply using maven locally
 
 **HOW TO RUN**
 
