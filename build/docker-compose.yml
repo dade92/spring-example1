@@ -5,6 +5,6 @@ services:
     command: mvn install
     working_dir: /usr/src/mymaven
     volumes:
-      - ${PWD}:/usr/src/mymaven
+      - ${PWD}/../.:/usr/src/mymaven
       - ${HOME}/.m2:/root/.m2
-      - ${PWD}/target:/usr/src/mymaven/target
+      - ${PWD}/../target:/usr/src/mymaven/target
