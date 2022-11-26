@@ -31,7 +31,7 @@
         <kotlin.version>1.6.0</kotlin.version>
         <spring-jdbc.version>5.2.12.RELEASE</spring-jdbc.version>
         <junit.version>4.13</junit.version>
-        <slf4j-api.version>1.7.32</slf4j-api.version>
+        <slf4j-api.version>2.0.4</slf4j-api.version>
         <jackson-module-kotlin.version>2.13.0</jackson-module-kotlin.version>
         <jmock.version>2.12.0</jmock.version>
         <log4j2.version>2.16.0</log4j2.version>
@@ -67,6 +67,7 @@
             <artifactId>kotlin-maven-allopen</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
+<!--        TODO for some unknown reason version 5.9.0 of JUnit5 does not work! -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
