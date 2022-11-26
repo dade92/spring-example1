@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    spring-example:
+      url: jdbc:mysql://mysqldb:3306/spring-example?serverTimezone=UTC
+      username: root
+      password: password
+test:
+  url: myPersonalUrl
+
+products:
+  url: http://external-catalog:8080

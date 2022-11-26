@@ -1,0 +1,8 @@
+{
+  "products": [
+    {
+      "description": "a description",
+      "enabled": true
+    }
+  ]
+}
