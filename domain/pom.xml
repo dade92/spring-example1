@@ -13,6 +13,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
+    <name>domain</name>
+
     <properties>
         <arrow-core.version>0.12.1</arrow-core.version>
     </properties>
@@ -24,8 +26,5 @@
             <version>${arrow-core.version}</version>
         </dependency>
     </dependencies>
-
-
-    <name>domain</name>
 
 </project>
