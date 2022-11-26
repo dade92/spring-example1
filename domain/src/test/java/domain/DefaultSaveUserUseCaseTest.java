@@ -14,8 +14,7 @@ public class DefaultSaveUserUseCaseTest {
 
     public JUnit5Mockery context = new JUnit5Mockery();
 
-    @Mock
-    private UserRepository userRepository;
+    private UserRepository userRepository = context.mock(UserRepository.class);
 
     private DefaultSaveUserUseCase defaultSaveUserUseCase;
 
