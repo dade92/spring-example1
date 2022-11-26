@@ -1,5 +1,6 @@
 package webapp
 
+import adapters.JdbcOrdersRepository
 import domain.DefaultRetrieveOrdersUseCase
 import domain.DefaultSaveOrdersUseCase
 import domain.NowDateTimeProvider
@@ -20,11 +21,11 @@ class OrdersConfiguration {
 
     @Bean
     fun retrieveOrdersUseCase(ordersRepository: OrdersRepository): RetrieveOrdersUseCase = DefaultRetrieveOrdersUseCase(ordersRepository)
-        //TODO move this inside adapters configuration
-//    @Bean
-//    fun ordersRepository(appJdbcTemplate: JdbcTemplate): OrdersRepository = JdbcOrdersRepository(
-//        appJdbcTemplate,
-//        NowDateTimeProvider()
-//    )
+
+    @Bean
+    fun ordersRepository(appJdbcTemplate: JdbcTemplate): OrdersRepository = JdbcOrdersRepository(
+        appJdbcTemplate,
+        NowDateTimeProvider()
+    )
 
 }

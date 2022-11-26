@@ -1,5 +1,6 @@
 package webapp;
 
+import adapters.JdbcUserRepository;
 import domain.*;
 import javax.sql.DataSource;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -39,9 +40,9 @@ public class AppConfiguration {
     public JdbcTemplate appJdbcTemplate(DataSource appDataSource) {
         return new JdbcTemplate(appDataSource);
     }
-    //TODO move this in adapters configuration
-//    @Bean
-//    public UserRepository userRepository(JdbcTemplate appJdbcTemplate) {
-//        return new JdbcUserRepository(appJdbcTemplate);
-//    }
+
+    @Bean
+    public UserRepository userRepository(JdbcTemplate appJdbcTemplate) {
+        return new JdbcUserRepository(appJdbcTemplate);
+    }
 }
