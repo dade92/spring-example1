@@ -2,7 +2,6 @@ package domain;
 
 import java.util.Optional;
 import org.jmock.Expectations;
-import org.jmock.auto.Mock;
 import org.jmock.junit5.JUnit5Mockery;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,12 +13,12 @@ public class DefaultSaveUserUseCaseTest {
 
     public JUnit5Mockery context = new JUnit5Mockery();
 
-    private UserRepository userRepository = context.mock(UserRepository.class);
+    private final UserRepository userRepository = context.mock(UserRepository.class);
 
     private DefaultSaveUserUseCase defaultSaveUserUseCase;
 
     @BeforeEach
-    public void setUp() throws Exception {
+    public void setUp() {
         defaultSaveUserUseCase = new DefaultSaveUserUseCase(
             userRepository
         );
