@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate
 import javax.sql.DataSource
 
 @Configuration
-@EnableConfigurationProperties(DbConfiguration::class)
+@EnableConfigurationProperties(DbSettings::class)
 class AdaptersConfiguration {
 
     @Bean
@@ -28,13 +28,11 @@ class AdaptersConfiguration {
     }
 
     @Bean
-    fun appDataSource(
-        dbConfiguration: DbConfiguration
-    ): DataSource {
+    fun appDataSource(dbSettings: DbSettings): DataSource {
         val dataSourceBuilder = DataSourceBuilder.create()
-        dataSourceBuilder.url(dbConfiguration.url)
-        dataSourceBuilder.username(dbConfiguration.username)
-        dataSourceBuilder.password(dbConfiguration.password)
+        dataSourceBuilder.url(dbSettings.url)
+        dataSourceBuilder.username(dbSettings.username)
+        dataSourceBuilder.password(dbSettings.password)
         return dataSourceBuilder.build()
     }
 

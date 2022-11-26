@@ -3,7 +3,7 @@ package adapters.configuration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties("spring.datasource.spring-example")
-public class DbConfiguration {
+public class DbSettings {
     public String url;
     public String username;
     public String password;
