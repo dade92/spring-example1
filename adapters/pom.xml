@@ -15,6 +15,11 @@
 
     <name>adapters</name>
 
+    <properties>
+        <h2.version>2.1.214</h2.version>
+        <spring-jdbc.version>5.2.12.RELEASE</spring-jdbc.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.myprojects</groupId>
