@@ -1,8 +1,6 @@
-package adapter
+package adapters
 
-import adapter.MyAdapter
 import org.hamcrest.CoreMatchers.`is`
-import org.junit.Assert
 import org.junit.Assert.*
 import org.junit.Test
 

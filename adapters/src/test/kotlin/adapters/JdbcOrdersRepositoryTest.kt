@@ -1,4 +1,4 @@
-package adapter
+package adapters
 
 import arrow.core.Left
 import arrow.core.Right
