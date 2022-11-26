@@ -32,7 +32,7 @@
         <spring-jdbc.version>5.2.12.RELEASE</spring-jdbc.version>
         <junit.version>4.13</junit.version>
         <slf4j-api.version>2.0.4</slf4j-api.version>
-        <jackson-module-kotlin.version>2.13.0</jackson-module-kotlin.version>
+        <jackson-module-kotlin.version>2.14.0</jackson-module-kotlin.version>
         <jmock.version>2.12.0</jmock.version>
         <log4j2.version>2.16.0</log4j2.version>
         <junit.jupiter.version>5.7.0</junit.jupiter.version>
@@ -90,6 +90,11 @@
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-commons</artifactId>
             <version>1.9.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-kotlin</artifactId>
+            <version>${jackson-module-kotlin.version}</version>
         </dependency>
     </dependencies>
 
