@@ -1,8 +1,8 @@
 package adapters
 
 import org.hamcrest.CoreMatchers.`is`
-import org.junit.Assert.*
-import org.junit.Test
+import org.hamcrest.MatcherAssert.assertThat
+import org.junit.jupiter.api.Test
 
 class MyAdapterTest {
 

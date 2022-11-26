@@ -9,7 +9,7 @@ import com.springexample.utils.Fixtures.Companion.readJson
 import domain.Product
 import domain.RetrieveProductsError
 import org.hamcrest.CoreMatchers.`is`
-import org.junit.Assert
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
@@ -45,7 +45,7 @@ class RestProductsRepositoryTest {
 
         val result = restProductsRepository.retrieveAll()
 
-        Assert.assertThat(
+        assertThat(
             result, `is`(
                 Right(
                     listOf(
@@ -67,6 +67,6 @@ class RestProductsRepositoryTest {
 
         val result = restProductsRepository.retrieveAll()
 
-        Assert.assertThat(result, `is`(Left(RetrieveProductsError.RestError)))
+        assertThat(result, `is`(Left(RetrieveProductsError.RestError)))
     }
 }

@@ -3,25 +3,23 @@ package domain;
 import java.util.Optional;
 import org.jmock.Expectations;
 import org.jmock.auto.Mock;
-import org.jmock.integration.junit4.JUnitRuleMockery;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.jmock.junit5.JUnit5Mockery;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 
 public class DefaultSaveUserUseCaseTest {
 
-    @Rule
-    public JUnitRuleMockery context = new JUnitRuleMockery();
+    public JUnit5Mockery context = new JUnit5Mockery();
 
     @Mock
     private UserRepository userRepository;
 
     private DefaultSaveUserUseCase defaultSaveUserUseCase;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         defaultSaveUserUseCase = new DefaultSaveUserUseCase(
             userRepository
