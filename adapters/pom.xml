@@ -7,8 +7,6 @@
     <artifactId>adapters</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <packaging>jar</packaging>
-
     <parent>
         <groupId>com.myprojects</groupId>
         <artifactId>spring-example1</artifactId>
