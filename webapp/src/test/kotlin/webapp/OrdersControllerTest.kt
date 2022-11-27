@@ -1,6 +1,5 @@
 package webapp
 
-import arrow.core.Either
 import arrow.core.Either.*
 import com.springexample.utils.Fixtures
 import domain.Order

@@ -1,7 +1,7 @@
 package adapters
 
-import arrow.core.Either
-import arrow.core.Either.*
+import arrow.core.Either.Left
+import arrow.core.Either.Right
 import domain.DateTimeProvider
 import domain.Order
 import domain.OrdersRepositoryError
