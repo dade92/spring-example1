@@ -1,8 +1,7 @@
 package adapters
 
 import arrow.core.Either
-import arrow.core.Left
-import arrow.core.Right
+import arrow.core.Either.*
 import domain.Product
 import domain.ProductsRepository
 import domain.RetrieveProductsError

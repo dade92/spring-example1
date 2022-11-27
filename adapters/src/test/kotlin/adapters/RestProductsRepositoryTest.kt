@@ -1,7 +1,7 @@
 package adapters
 
-import arrow.core.Left
-import arrow.core.Right
+import arrow.core.Either
+import arrow.core.Either.*
 import com.github.tomakehurst.wiremock.client.WireMock
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig
 import com.github.tomakehurst.wiremock.junit5.WireMockExtension

@@ -1,7 +1,7 @@
 package webapp
 
-import arrow.core.Left
-import arrow.core.Right
+import arrow.core.Either
+import arrow.core.Either.*
 import com.springexample.utils.Fixtures
 import domain.Product
 import domain.RetrieveProductsError

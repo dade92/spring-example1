@@ -1,6 +1,7 @@
 package domain
 
-import arrow.core.Right
+import arrow.core.Either
+import arrow.core.Either.Right
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.jmock.AbstractExpectations.returnValue
