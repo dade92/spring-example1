@@ -9,7 +9,6 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestOperations;
 
 public class RestUserRepository implements UserRepository {
-
     private final String basePath;
     private final RestOperations restOperations;
 

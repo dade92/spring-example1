@@ -13,8 +13,8 @@ class ProductsController(
 ) {
 
     @GetMapping("/products")
-    fun retrieve(): ResponseEntity<ProductResponse> {
-        return retrieveProductsUseCase.execute().fold(
+    fun retrieve(): ResponseEntity<ProductResponse> =
+        retrieveProductsUseCase.execute().fold(
             {
                 ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build()
             },
@@ -22,7 +22,6 @@ class ProductsController(
                 ResponseEntity.ok(ProductResponse(it))
             }
         )
-    }
 
 }
 
