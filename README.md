@@ -1,3 +1,5 @@
+**SPRING EXAMPLE**
+
 Sample maven project for spring boot applications using java and kotlin languages.
 It follows hexagonal architecture principles (https://netflixtechblog.com/ready-for-changes-with-hexagonal-architecture-b315ec967749)
 and uses different testing techniques, especially for the data layer classes.
