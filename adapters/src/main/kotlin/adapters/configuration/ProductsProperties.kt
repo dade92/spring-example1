@@ -1,4 +1,4 @@
-package webapp
+package adapters.configuration
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 
