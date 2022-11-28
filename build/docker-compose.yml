@@ -2,7 +2,7 @@ version: '3'
 services:
   builder:
     image: maven:3.6.0-jdk-11-slim
-    command: mvn install -DskipTests
+    command: mvn install
     working_dir: /usr/src/mymaven
     volumes:
       - ${PWD}/../.:/usr/src/mymaven
