@@ -9,9 +9,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-@EnableConfigurationProperties(
-    ProductsProperties::class
-)
+@EnableConfigurationProperties(ProductsProperties::class)
 class ProductsConfiguration {
 
     @Bean
