@@ -7,4 +7,4 @@ services:
     volumes:
       - ${PWD}/../.:/usr/src/mymaven
       - ${HOME}/.m2:/root/.m2
-      - ${PWD}/../target:/usr/src/mymaven/webapp/target
+      - ${PWD}/../webapp/target:/usr/src/mymaven/webapp/target
