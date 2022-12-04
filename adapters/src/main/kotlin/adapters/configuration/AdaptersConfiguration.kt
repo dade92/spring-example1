@@ -32,9 +32,7 @@ class AdaptersConfiguration {
         RestProductsRepository(productsProperties.url, RestTemplate())
 
     @Bean
-    fun userRepository(appJdbcTemplate: JdbcTemplate): UserRepository {
-        return JdbcUserRepository(appJdbcTemplate)
-    }
+    fun userRepository(appJdbcTemplate: JdbcTemplate): UserRepository = JdbcUserRepository(appJdbcTemplate)
 
     @Bean
     fun appDataSource(dbSettings: DbSettings): DataSource {
@@ -46,8 +44,6 @@ class AdaptersConfiguration {
     }
 
     @Bean
-    fun appJdbcTemplate(appDataSource: DataSource): JdbcTemplate? {
-        return JdbcTemplate(appDataSource)
-    }
+    fun appJdbcTemplate(appDataSource: DataSource): JdbcTemplate? = JdbcTemplate(appDataSource)
 
 }
