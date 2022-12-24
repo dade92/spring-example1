@@ -5,10 +5,10 @@ spring:
       username: root
       password: password
   kafka:
-    producer:
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
     consumer:
-      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      group-id: group-1
+      auto-offset-reset: earliest
+      bootstrap-servers: localhost:9092
 
 test:
   url: myPersonalUrl
