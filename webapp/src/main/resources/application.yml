@@ -4,6 +4,7 @@ spring:
       url: jdbc:mysql://localhost:3306/spring-example?serverTimezone=UTC
       username: root
       password: password
+
 test:
   url: myPersonalUrl
 
