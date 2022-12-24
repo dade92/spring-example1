@@ -16,6 +16,19 @@ services:
       - "8080:8080"
   external-catalog:
     image: davide92/external-catalog
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+      - "9094:9094"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: localhost # host.docker.internal if you want to try it using the scripts inside the docker image
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CREATE_TOPICS: "PRODUCT_CANCELLATION_SUCCEEDED:1:1,PRODUCT_CANCELLATION_FAILED:1:1"
 volumes:
   mysql-test-data:
     driver: local
