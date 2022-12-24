@@ -4,6 +4,12 @@ spring:
       url: jdbc:mysql://localhost:3306/spring-example?serverTimezone=UTC
       username: root
       password: password
+  kafka:
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+
 test:
   url: myPersonalUrl
 
