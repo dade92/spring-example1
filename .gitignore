@@ -1,4 +1,6 @@
-/target
+webapp/target
+domain/target
+adapters/target
 .classpath
 .project
 spring-example1.iml
