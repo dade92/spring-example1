@@ -20,5 +20,5 @@ This will download from dockerhub the images and run everything.
 
 **HOW TO RUN LOCALLY**
 
-The app expects to find a database locally with all the tables. So, first download this: https://github.com/dade92/mysql-custom.
-Run it and then launch the app locally.
+Run the script `./run-local-environment.sh`. This will download only the "helper" images. 
+Then run the app.
