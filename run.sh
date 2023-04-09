@@ -1,6 +1,6 @@
 echo "Starting database..."
 docker compose up -d mysqldb
-sleep 2
+sleep 4
 
 echo "Starting external catalog..."
 docker compose up -d external-catalog
