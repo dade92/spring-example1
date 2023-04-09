@@ -1,6 +1,6 @@
 version: '3'
 services:
-  mysqldb:
+  mysql:
     image: davide92/mysql-custom
     container_name: mysql
     ports:
@@ -10,8 +10,6 @@ services:
   app:
     image: davide92/spring-example1
     container_name: app
-    depends_on:
-      - mysqldb
     restart:
       always
     ports:
