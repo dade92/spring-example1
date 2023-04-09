@@ -1,4 +1,4 @@
-**SPRING EXAMPLE**
+# SPRING EXAMPLE
 
 Sample maven project for spring boot applications using java and kotlin languages.
 It follows hexagonal architecture
@@ -8,7 +8,7 @@ It uses some basic concepts of functional programming (like monads) using arrow 
 It contains also a Jenkinsfile to allow continuous integration with jenkins, and
 a Dockerfile that can be used after the build stage to build a docker image.
 
-**HOW TO BUILD**
+## HOW TO BUILD
 
 There are two options:
 
@@ -17,12 +17,12 @@ There are two options:
   usual maven directories
 - Build locally running `mvn clean package`
 
-**HOW TO RUN**
+## HOW TO RUN
 
 Run using `./run.sh` command.
 This will download from dockerhub the images and run everything using docker compose.
 
-**HOW TO RUN LOCALLY**
+## HOW TO RUN LOCALLY
 
 Run the script `./run-local-environment.sh`. This will download only the "helper" images.
 Then run the app.
