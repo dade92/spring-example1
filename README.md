@@ -17,6 +17,12 @@ There are two options:
   usual maven directories
 - Build locally running `mvn clean package`
 
+### CI/CD
+
+Linked to this project there is a CI/CD integration (both using Jenkins and Github actions) that is triggered
+on every master push. This will push automatically the docker image on the dockerhub registry,
+ready for the deployment.
+
 ## HOW TO RUN
 
 Run using `./run.sh` command.
