@@ -19,6 +19,7 @@
         <h2.version>2.1.214</h2.version>
         <spring-jdbc.version>5.2.12.RELEASE</spring-jdbc.version>
         <mysql-connector-java.version>8.0.30</mysql-connector-java.version>
+        <wiremock-jre8-standalone.version>2.35.0</wiremock-jre8-standalone.version>
     </properties>
 
     <dependencies>
@@ -47,8 +48,8 @@
         </dependency>
         <dependency>
             <groupId>com.github.tomakehurst</groupId>
-            <artifactId>wiremock-jre8</artifactId>
-            <version>2.35.0</version>
+            <artifactId>wiremock-jre8-standalone</artifactId>
+            <version>${wiremock-jre8-standalone.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
