@@ -1,3 +1,6 @@
+echo "Pulling the latest images..."
+docker compose pull app
+
 echo "Starting database..."
 docker compose up -d mysql
 sleep 4
