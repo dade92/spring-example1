@@ -1,7 +1,7 @@
 version: '3'
 services:
   builder:
-    image: maven:3.6.0-jdk-11-slim
+    image: maven:3.9.3-amazoncorretto-20
     command: mvn install
     working_dir: /usr/src/mymaven
     volumes:
