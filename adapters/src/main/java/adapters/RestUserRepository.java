@@ -42,7 +42,7 @@ public class RestUserRepository implements UserRepository {
         try {
             ResponseEntity<String> response = restOperations.postForEntity(
                 basePath + "/addUser",
-                new RestUserRequest(user.getName(), user.getPassword()),
+                new RestUserRequest(user.name(), user.password()),
                 String.class
             );
             if (response.getStatusCode() == HttpStatus.OK) {
@@ -62,6 +62,6 @@ public class RestUserRepository implements UserRepository {
     }
 
     private User adaptUser(RestUser user) {
-        return new User(user.getUsername(), user.getPassword(), "address");
+        return new User(user.username(), user.password(), "address");
     }
 }

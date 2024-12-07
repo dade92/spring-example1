@@ -3,14 +3,12 @@ package webapp;
 import domain.RetrieveUserUseCase;
 import domain.SaveUserUseCase;
 import domain.User;
-import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import webapp.data.Outcome;
-import webapp.data.RetrieveUserResponse;
-import webapp.data.SaveUserRequest;
-import webapp.data.UserResponse;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
@@ -32,8 +30,8 @@ public class UserController {
         Optional<User> user = retrieveUserUseCase.retrieve(userId);
         return user.map(value -> ResponseEntity.ok(
             new RetrieveUserResponse(
-                value.getName(),
-                value.getAddress()
+                value.name(),
+                value.address()
             ))).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
@@ -42,8 +40,8 @@ public class UserController {
         Optional<User> user = retrieveUserUseCase.retrieveByUsername(username);
         return user.map(value -> ResponseEntity.ok(
             new RetrieveUserResponse(
-                value.getName(),
-                value.getAddress()
+                value.name(),
+                value.address()
             ))).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
@@ -59,7 +57,32 @@ public class UserController {
     }
 
     private User adaptUser(SaveUserRequest saveUserRequest) {
-        return new User(saveUserRequest.user.username, saveUserRequest.user.password, saveUserRequest.user.address);
+        return new User(saveUserRequest.user().username(), saveUserRequest.user().password(), saveUserRequest.user().address());
     }
+
+}
+
+record SaveUserRequest(
+    UserRequest user
+) {
+}
+
+record UserRequest(
+    String username,
+    String password,
+    String address
+) {
+}
+
+record RetrieveUserResponse(
+    String username,
+    String address
+) {
+
+}
+
+record UserResponse(
+    Outcome result
+) {
 
 }

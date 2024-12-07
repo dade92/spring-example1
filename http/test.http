@@ -1,16 +1,16 @@
-GET {{localhost}}/user/4
+GET {{host}}/user/1
 Content-Type: application/json
 Accept: application/json
 
 ###
 
-GET {{localhost}}/user?username=Stefania
+GET {{host}}/user?username=Stefania
 Content-Type: application/json
 Accept: application/json
 
 ###
 
-POST {{localhost}}/user/save
+POST {{host}}/user/save
 Content-Type: application/json
 Accept: application/json
 
@@ -24,6 +24,6 @@ Accept: application/json
 
 ###
 
-GET {{localhost}}/products
+GET {{host}}/products
 Content-Type: application/json
 Accept: application/json

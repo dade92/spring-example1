@@ -14,3 +14,9 @@ public class RestUserResponse {
         this.user = user;
     }
 }
+
+record RestUser(
+    long id,
+    String username,
+    String password
+) {}

@@ -44,13 +44,13 @@ public class JdbcUserRepository implements UserRepository {
     public Optional<Boolean> addUser(User user) {
         try {
             jdbcOperations.update("INSERT INTO USERS (USERNAME, PASSWORD, ADDRESS) VALUES (?, ?, ?)",
-                user.getName(),
-                user.getPassword(),
-                user.getAddress()
+                user.name(),
+                user.password(),
+                user.address()
             );
             return Optional.of(true);
         } catch (DataAccessException e) {
-            logger.error("Cannot save user with username {}", user.getName());
+            logger.error("Cannot save user with username {}", user.name());
             e.printStackTrace();
             return Optional.empty();
         }
