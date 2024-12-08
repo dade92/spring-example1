@@ -14,7 +14,3 @@ class DefaultSaveOrdersUseCase(
         ordersRepository.save(order, username)
 
 }
-
-data class Order(
-    val type: String
-)

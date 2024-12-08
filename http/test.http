@@ -1,4 +1,4 @@
-GET {{host}}/user/1
+GET {{host}}/user/2
 Content-Type: application/json
 Accept: application/json
 

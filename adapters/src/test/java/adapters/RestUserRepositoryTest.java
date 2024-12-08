@@ -1,7 +1,7 @@
 package adapters;
 
 import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
-import com.springexample.utils.Fixtures;
+import utils.Fixtures;
 import domain.User;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
