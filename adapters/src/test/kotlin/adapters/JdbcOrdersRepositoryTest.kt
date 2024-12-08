@@ -21,6 +21,8 @@ import java.time.LocalDateTime
 
 private val NOW = LocalDateTime.of(2021, 3, 6, 0, 0, 0)
 
+private const val s = "sergio"
+
 class JdbcOrdersRepositoryTest {
 
     @RegisterExtension
@@ -53,9 +55,10 @@ class JdbcOrdersRepositoryTest {
             will(returnValue(NOW))
         })
 
-        val result = jdbcOrdersRepository.save(Order("chair"), "davide")
 
-        assertThat(fetchRow(), `is`(DBResult("chair", NOW)))
+        val result = jdbcOrdersRepository.save(Order(type), username)
+
+        assertThat(fetchRow(), `is`(DBResult(type, NOW)))
         assertThat(result, `is`(Right(Unit)))
     }
 
@@ -64,7 +67,8 @@ class JdbcOrdersRepositoryTest {
         context.checking(Expectations().apply {
             never(dateTimeProvider)
         })
-        val result = jdbcOrdersRepository.save(Order("chair"), "sergio")
+
+        val result = jdbcOrdersRepository.save(Order(type), anotherUsername)
 
         assertThat(result, `is`(Left(OrdersRepositoryError.UserNotExistingError)))
     }
@@ -76,9 +80,9 @@ class JdbcOrdersRepositoryTest {
             will(returnValue(NOW))
         })
 
-        jdbcOrdersRepository.save(Order("chair"), "davide")
+        jdbcOrdersRepository.save(Order(type), username)
 
-        val result = jdbcOrdersRepository.retrieve("davide")
+        val result = jdbcOrdersRepository.retrieve(username)
 
         assertThat(result, `is`(Right(listOf(Order("chair")))))
     }
@@ -92,6 +96,12 @@ class JdbcOrdersRepositoryTest {
                 resultSet.getTimestamp("INSERTION_TIME").toLocalDateTime()
             )
         }
+    }
+
+    companion object {
+        private const val username = "davide"
+        private const val anotherUsername = "sergio"
+        private const val type = "chair"
     }
 
     data class DBResult(
