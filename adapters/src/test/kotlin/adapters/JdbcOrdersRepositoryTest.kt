@@ -105,7 +105,7 @@ class JdbcOrdersRepositoryTest {
     }
 
     data class DBResult(
-        val tipe: String,
+        val type: String,
         val insertionTime: LocalDateTime
     )
 }
