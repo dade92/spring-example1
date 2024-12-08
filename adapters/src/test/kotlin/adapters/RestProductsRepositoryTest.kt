@@ -5,7 +5,7 @@ import arrow.core.Either.Right
 import com.github.tomakehurst.wiremock.client.WireMock
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig
 import com.github.tomakehurst.wiremock.junit5.WireMockExtension
-import com.springexample.utils.Fixtures.Companion.readJson
+import utils.Fixtures.Companion.readJson
 import domain.Product
 import domain.RetrieveProductsError
 import org.hamcrest.CoreMatchers.`is`

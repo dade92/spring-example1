@@ -1,4 +1,4 @@
-package com.springexample.utils
+package utils
 
 class Fixtures {
     companion object {

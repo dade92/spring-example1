@@ -17,7 +17,6 @@ import org.junit.jupiter.api.extension.RegisterExtension
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType
-import java.sql.ResultSet
 import java.time.LocalDateTime
 
 private val NOW = LocalDateTime.of(2021, 3, 6, 0, 0, 0)
@@ -54,11 +53,9 @@ class JdbcOrdersRepositoryTest {
             will(returnValue(NOW))
         })
 
-        insertUser(666, "davide", "XXX", "via vai")
-
         val result = jdbcOrdersRepository.save(Order("chair"), "davide")
 
-        assertThat(fetchRow(), `is`(Order("chair")))
+        assertThat(fetchRow(), `is`(DBResult("chair", NOW)))
         assertThat(result, `is`(Right(Unit)))
     }
 
@@ -67,7 +64,7 @@ class JdbcOrdersRepositoryTest {
         context.checking(Expectations().apply {
             never(dateTimeProvider)
         })
-        val result = jdbcOrdersRepository.save(Order("chair"), "davide")
+        val result = jdbcOrdersRepository.save(Order("chair"), "sergio")
 
         assertThat(result, `is`(Left(OrdersRepositoryError.UserNotExistingError)))
     }
@@ -79,7 +76,6 @@ class JdbcOrdersRepositoryTest {
             will(returnValue(NOW))
         })
 
-        insertUser(666, "davide", "XXX", "via vai")
         jdbcOrdersRepository.save(Order("chair"), "davide")
 
         val result = jdbcOrdersRepository.retrieve("davide")
@@ -87,17 +83,19 @@ class JdbcOrdersRepositoryTest {
         assertThat(result, `is`(Right(listOf(Order("chair")))))
     }
 
-    private fun fetchRow(): Order {
+    private fun fetchRow(): DBResult {
         return jdbcTemplate.queryForObject(
             "SELECT * FROM ORDERS WHERE USER_ID=666"
-        ) { resultSet: ResultSet, _: Int ->
-            Order(
+        ) { resultSet, _: Int ->
+            DBResult(
                 resultSet.getString("TYPE"),
+                resultSet.getTimestamp("INSERTION_TIME").toLocalDateTime()
             )
         }
     }
 
-    private fun insertUser(id: Long, username: String, password: String, address: String) {
-        jdbcTemplate.update("INSERT INTO USERS VALUES (?, ?, ?, ?)", id, username, password, address)
-    }
+    data class DBResult(
+        val tipe: String,
+        val insertionTime: LocalDateTime
+    )
 }

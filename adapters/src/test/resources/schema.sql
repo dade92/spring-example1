@@ -12,5 +12,7 @@ CREATE TABLE ORDERS
     ID int PRIMARY KEY AUTO_INCREMENT,
     TYPE varchar(255),
     USER_ID int,
-    INSERTION_TIME date
-)
+    INSERTION_TIME datetime
+);
+
+INSERT INTO `USERS` (`ID`, `USERNAME`, `PASSWORD`, `ADDRESS`) VALUES (666, 'davide', 'XXX', 'Via Verdi 4D');
