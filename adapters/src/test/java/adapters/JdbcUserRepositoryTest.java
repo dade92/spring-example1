@@ -1,18 +1,25 @@
 package adapters;
 
 import domain.User;
-import java.util.Collections;
-import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
+import java.util.Collections;
+import java.util.Optional;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class JdbcUserRepositoryTest {
+    private static final String USERNAME = "davide";
+    public static final String ANOTHER_USERNAME = "Sergio";
+    private static final String PASSWORD = "XXX";
+    private static final String ADDRESS = "Via Verdi 4D";
+    public static final User A_USER = new User(USERNAME, PASSWORD, ADDRESS);
+    public static final User ANOTHER_USER = new User(ANOTHER_USERNAME, PASSWORD, ADDRESS);
 
     private JdbcTemplate jdbcTemplate;
     private JdbcUserRepository jdbcUserRepository;
@@ -31,29 +38,25 @@ public class JdbcUserRepositoryTest {
 
     @Test
     public void fetchSuccessfully() {
-        insertUser(666L, "Davide", "XXX", "via vai");
-
         Optional<User> user = jdbcUserRepository.fetch(666L);
 
-        assertThat(user, is(Optional.of(new User("Davide", "XXX", "via vai"))));
+        assertThat(user, is(Optional.of(A_USER)));
     }
 
     @Test
     public void addUserSuccessfully() {
-        jdbcUserRepository.addUser(new User("Davide", "XXX", "address"));
+        jdbcUserRepository.addUser(ANOTHER_USER);
 
-        User user = findUser("Davide");
+        User user = findUser(ANOTHER_USERNAME);
 
-        assertThat(Optional.of(user), is(Optional.of(new User("Davide", "XXX", "address"))));
+        assertThat(Optional.of(user), is(Optional.of(ANOTHER_USER)));
     }
 
     @Test
     public void fetchByUsernameSuccessfully() {
-        insertUser(666L, "Davide", "XXX", "via vai");
+        Optional<User> user = jdbcUserRepository.fetchByUsername(USERNAME);
 
-        Optional<User> user = jdbcUserRepository.fetchByUsername("Davide");
-
-        assertThat(user, is(Optional.of(new User("Davide", "XXX", "via vai"))));
+        assertThat(user, is(Optional.of(A_USER)));
     }
 
     private User findUser(String username) {
@@ -62,11 +65,9 @@ public class JdbcUserRepositoryTest {
             (resultSet, i) -> new User(
                 resultSet.getString("USERNAME"),
                 resultSet.getString("PASSWORD"),
-                "address")
+                resultSet.getString("ADDRESS")
+            )
         );
     }
 
-    private void insertUser(long id, String username, String password, String address) {
-        jdbcTemplate.update("INSERT INTO USERS VALUES (?, ?, ?, ?)", id, username, password, address);
-    }
 }
