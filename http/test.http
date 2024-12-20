@@ -6,7 +6,7 @@ Accept: application/json
 
 ### Retrieve a user by username
 
-GET {{host}}/user?username=Stefania
+GET {{host}}/user?username=Test
 Content-Type: application/json
 Accept: application/json
 
