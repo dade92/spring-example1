@@ -1,14 +1,16 @@
-GET {{host}}/user/2
+### Retrieve a user by id
+
+GET {{host}}/user/1
 Content-Type: application/json
 Accept: application/json
 
-###
+### Retrieve a user by username
 
 GET {{host}}/user?username=Stefania
 Content-Type: application/json
 Accept: application/json
 
-###
+### Save a new user
 
 POST {{host}}/user/save
 Content-Type: application/json
@@ -22,7 +24,7 @@ Accept: application/json
   }
 }
 
-###
+### Retrieve list of products
 
 GET {{host}}/products
 Content-Type: application/json

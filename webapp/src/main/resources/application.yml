@@ -2,8 +2,8 @@ spring:
   datasource:
     spring-example:
       url: jdbc:mysql://localhost:3306/spring-example?serverTimezone=UTC
-      username: root
-      password: password
+      username: ${MYSQL_USERNAME}
+      password: ${MYSQL_PASSWORD}
 test:
   url: myPersonalUrl
 

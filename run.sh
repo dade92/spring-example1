@@ -1,3 +1,7 @@
+#!/bin/bash
+
+cd deploy
+
 echo "Pulling the latest images..."
 docker compose pull app
 

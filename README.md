@@ -25,10 +25,17 @@ ready for the deployment.
 
 ## HOW TO RUN
 
+### Deploy everything
+
 Run using `./run.sh` command.
 This will download from dockerhub the images and run everything using docker compose.
 
-## HOW TO RUN LOCALLY
+### Run locally
 
 Run the script `./run-local-environment.sh`. This will download only the "helper" images.
 Then run the app.
+
+In both scenario, you have to inject environment variables in your application: if you run it locally, you can use
+your favourite IDE configuration. Instead in case of an entire deploy, you can specify them directly in
+the `./deploy/docker-compose.yaml`
+root file (a better way should be to )
