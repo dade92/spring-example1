@@ -2,4 +2,4 @@
 
 cd local-env
 
-docker compose up -d --force-recreate mysql
+docker compose up -d mysql
