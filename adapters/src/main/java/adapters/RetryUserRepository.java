@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 public class RetryUserRepository implements UserRepository {
+
     private static final Logger logger = LoggerFactory.getLogger(RetryUserRepository.class);
 
     private final UserRepository delegate;
@@ -62,7 +63,7 @@ public class RetryUserRepository implements UserRepository {
             try {
                 Thread.sleep(backoff);
             } catch (InterruptedException ie) {
-                Thread.currentThread().interrupt(); // Restore the interrupt status
+                Thread.currentThread().interrupt();
                 logger.error("Retry interrupted: {}", ie.getMessage(), ie);
                 break;
             }

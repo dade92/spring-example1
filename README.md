@@ -19,7 +19,7 @@ There are two options:
 
 ### CI/CD
 
-Linked to this project there is a CI/CD integration (both using Jenkins and Github actions) that is triggered
+Linked to this project there is a CI/CD integration (Github actions) that is triggered
 on every master push. This will push automatically the docker image on the dockerhub registry,
 ready for the deployment.
 
@@ -38,4 +38,11 @@ Then run the app.
 In both scenario, you have to inject environment variables in your application: if you run it locally, you can use
 your favourite IDE configuration. Instead in case of an entire deploy, you can specify them directly in
 the `./deploy/docker-compose.yaml`
-root file (a better way should be to )
+root file (just for simplicity, a better way should be to pick them from the env variables of your OS).
+
+In local, you can connect to the local mysql using the following credentials:
+
+```http request
+username: root
+password: password
+```

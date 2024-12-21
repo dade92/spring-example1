@@ -1,7 +1,7 @@
 package adapters.configuration
 
 import adapters.JdbcOrdersRepository
-import adapters.JdbcUserRepository
+import adapters.users.JdbcUserRepository
 import adapters.RestProductsRepository
 import domain.NowDateTimeProvider
 import domain.OrdersRepository
@@ -32,7 +32,8 @@ class AdaptersConfiguration {
         RestProductsRepository(productsProperties.url, RestTemplate())
 
     @Bean
-    fun userRepository(appJdbcTemplate: JdbcTemplate): UserRepository = JdbcUserRepository(appJdbcTemplate)
+    fun userRepository(appJdbcTemplate: JdbcTemplate): UserRepository =
+        JdbcUserRepository(appJdbcTemplate)
 
     @Bean
     fun appDataSource(dbSettings: DbSettings): DataSource {

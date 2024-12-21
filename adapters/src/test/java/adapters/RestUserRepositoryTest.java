@@ -1,5 +1,6 @@
 package adapters;
 
+import adapters.users.RestUserRepository;
 import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
 import utils.Fixtures;
 import domain.User;

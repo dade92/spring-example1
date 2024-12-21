@@ -1,12 +1,13 @@
-package adapters;
+package adapters.users;
 
 import domain.User;
 import domain.UserRepository;
-import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestOperations;
+
+import java.util.Optional;
 
 public class RestUserRepository implements UserRepository {
     private final String basePath;
@@ -64,4 +65,32 @@ public class RestUserRepository implements UserRepository {
     private User adaptUser(RestUser user) {
         return new User(user.username(), user.password(), "address");
     }
+}
+
+record RestUserRequest(
+    String username,
+    String password
+) {
+}
+
+class RestUserResponse {
+    private RestUser user;
+
+    public RestUserResponse() {
+    }
+
+    public RestUser getUser() {
+        return user;
+    }
+
+    public void setUser(RestUser user) {
+        this.user = user;
+    }
+}
+
+record RestUser(
+    long id,
+    String username,
+    String password
+) {
 }

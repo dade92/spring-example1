@@ -1,18 +1,18 @@
 ### Retrieve a user by id
 
-GET {{host}}/user/1
+GET {{host}}/api/user/1
 Content-Type: application/json
 Accept: application/json
 
 ### Retrieve a user by username
 
-GET {{host}}/user?username=Test
+GET {{host}}/api/user?username=Test
 Content-Type: application/json
 Accept: application/json
 
 ### Save a new user
 
-POST {{host}}/user/save
+POST {{host}}/api/user/save
 Content-Type: application/json
 Accept: application/json
 
@@ -26,6 +26,6 @@ Accept: application/json
 
 ### Retrieve list of products
 
-GET {{host}}/products
+GET {{host}}/api/products
 Content-Type: application/json
 Accept: application/json

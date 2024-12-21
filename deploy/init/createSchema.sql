@@ -17,3 +17,5 @@ CREATE TABLE ORDERS
     USER_ID int,
     INSERTION_TIME datetime
 );
+
+CREATE INDEX idx_username ON USERS(USERNAME);

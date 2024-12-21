@@ -1,4 +1,4 @@
-package adapters;
+package adapters.users;
 
 import domain.User;
 import domain.UserRepository;

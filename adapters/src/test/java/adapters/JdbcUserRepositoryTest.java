@@ -1,5 +1,6 @@
 package adapters;
 
+import adapters.users.JdbcUserRepository;
 import domain.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

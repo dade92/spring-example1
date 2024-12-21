@@ -17,6 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class RetryUserRepositoryTest {
 
+    private static final int MAX_RETRIES = 3;
+
     @RegisterExtension
     Mockery context = new JUnit5Mockery();
 
@@ -27,7 +29,7 @@ class RetryUserRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        retryUserRepository = new RetryUserRepository(delegate, 3, 100);
+        retryUserRepository = new RetryUserRepository(delegate, MAX_RETRIES, 100);
     }
 
     @Test
@@ -36,7 +38,7 @@ class RetryUserRepositoryTest {
         User returnedUser = new User("name", "XXX", "");
 
         context.checking(new Expectations() {{
-            exactly(2).of(delegate).fetch(userId);
+            exactly(MAX_RETRIES - 1).of(delegate).fetch(userId);
             will(returnValue(Optional.empty()));
 
             oneOf(delegate).fetch(userId);
@@ -55,7 +57,7 @@ class RetryUserRepositoryTest {
         User returnedUser = new User("name", "XXX", "");
 
         context.checking(new Expectations() {{
-            exactly(2).of(delegate).fetchByUsername(username);
+            exactly(MAX_RETRIES - 1).of(delegate).fetchByUsername(username);
             will(returnValue(Optional.empty()));
 
             oneOf(delegate).fetchByUsername(username);
@@ -73,7 +75,7 @@ class RetryUserRepositoryTest {
         long userId = 123L;
 
         context.checking(new Expectations() {{
-            exactly(3).of(delegate).fetch(userId);
+            exactly(MAX_RETRIES).of(delegate).fetch(userId);
             will(returnValue(Optional.empty()));
         }});
 
@@ -88,7 +90,7 @@ class RetryUserRepositoryTest {
         String username = "name";
 
         context.checking(new Expectations() {{
-            exactly(3).of(delegate).fetchByUsername(username);
+            exactly(MAX_RETRIES).of(delegate).fetchByUsername(username);
             will(returnValue(Optional.empty()));
         }});
 
@@ -104,7 +106,7 @@ class RetryUserRepositoryTest {
         User returnedUser = new User("name", "XXX", "");
 
         context.checking(new Expectations() {{
-            exactly(2).of(delegate).fetch(userId);
+            exactly(MAX_RETRIES - 1).of(delegate).fetch(userId);
             will(throwException(new RuntimeException("Service unavailable")));
 
             oneOf(delegate).fetch(userId);
@@ -123,7 +125,7 @@ class RetryUserRepositoryTest {
         User returnedUser = new User("name", "XXX", "");
 
         context.checking(new Expectations() {{
-            exactly(2).of(delegate).fetchByUsername(username);
+            exactly(MAX_RETRIES - 1).of(delegate).fetchByUsername(username);
             will(throwException(new RuntimeException("Service unavailable")));
 
             oneOf(delegate).fetchByUsername(username);
