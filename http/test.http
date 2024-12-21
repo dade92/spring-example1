@@ -24,6 +24,19 @@ Accept: application/json
   }
 }
 
+### Save a new order
+
+POST {{host}}/api/saveOrder
+Content-Type: application/json
+Accept: application/json
+
+{
+  "username": "Davide",
+  "order": {
+    "type": "House"
+  }
+}
+
 ### Retrieve list of products
 
 GET {{host}}/api/products
