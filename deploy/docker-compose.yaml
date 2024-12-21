@@ -19,8 +19,8 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - MYSQL_USERNAME=root
-      - MYSQL_PASSWORD=password
+      - MYSQL_USERNAME=root       #env var in your OS
+      - MYSQL_PASSWORD=password   #env var in your OS
   external-catalog:
     image: davide92/external-catalog
     container_name: external-catalog
