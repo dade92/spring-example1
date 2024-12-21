@@ -1,6 +1,7 @@
 package webapp
 
-import arrow.core.Either.*
+import arrow.core.Either.Left
+import arrow.core.Either.Right
 import com.springexample.utils.Fixtures
 import domain.Order
 import domain.OrdersRepositoryError
@@ -17,10 +18,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
-
-private const val USERNAME = "davide"
-private val AN_ORDER = Order("chair")
-private val SAVE_ORDER_REQUEST = Fixtures.readJson("/saveOrderRequest.json")
 
 @WebMvcTest(OrdersController::class)
 class OrdersControllerTest {
@@ -79,5 +76,11 @@ class OrdersControllerTest {
             get("/retrieveOrders?user=Davide")
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(MockMvcResultMatchers.status().isNotFound)
+    }
+
+    companion object {
+        private const val USERNAME = "davide"
+        private val AN_ORDER = Order("chair")
+        private val SAVE_ORDER_REQUEST = Fixtures.readJson("/saveOrderRequest.json")
     }
 }

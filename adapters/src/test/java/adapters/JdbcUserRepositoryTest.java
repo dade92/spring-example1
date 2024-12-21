@@ -2,6 +2,7 @@ package adapters;
 
 import adapters.users.JdbcUserRepository;
 import domain.User;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,6 +14,7 @@ import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class JdbcUserRepositoryTest {
     private static final String USERNAME = "davide";
@@ -41,7 +43,7 @@ public class JdbcUserRepositoryTest {
     public void fetchSuccessfully() {
         Optional<User> user = jdbcUserRepository.fetch(666L);
 
-        assertThat(user, is(Optional.of(A_USER)));
+        assertEquals(Optional.of(A_USER), user);
     }
 
     @Test
@@ -50,14 +52,14 @@ public class JdbcUserRepositoryTest {
 
         User user = findUser(ANOTHER_USERNAME);
 
-        assertThat(Optional.of(user), is(Optional.of(ANOTHER_USER)));
+        assertEquals(Optional.of(ANOTHER_USER), Optional.of(user));
     }
 
     @Test
     public void fetchByUsernameSuccessfully() {
         Optional<User> user = jdbcUserRepository.fetchByUsername(USERNAME);
 
-        assertThat(user, is(Optional.of(A_USER)));
+        assertEquals(Optional.of(A_USER), user);
     }
 
     private User findUser(String username) {

@@ -1,12 +1,11 @@
 package domain
 
 import arrow.core.Either.Right
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.MatcherAssert.assertThat
 import org.jmock.AbstractExpectations.returnValue
 import org.jmock.Expectations
 import org.jmock.auto.Mock
 import org.jmock.junit5.JUnit5Mockery
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
@@ -38,6 +37,8 @@ class DefaultSaveOrdersUseCaseTest {
             will(returnValue(expectedResult))
         })
 
-        assertThat(defaultSaveOrdersUseCase.execute(username, order), `is`(expectedResult))
+        val actual = defaultSaveOrdersUseCase.execute(username, order)
+
+        assertEquals(expectedResult, actual)
     }
 }

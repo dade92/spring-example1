@@ -5,8 +5,11 @@ It follows hexagonal architecture
 principles (https://netflixtechblog.com/ready-for-changes-with-hexagonal-architecture-b315ec967749)
 and uses different testing techniques, especially for the data layer classes.
 It uses some basic concepts of functional programming (like monads) using arrow kotlin library.
-It contains also a Jenkinsfile to allow continuous integration with jenkins, and
+It's also integrated with Github CI/CD (Github actions) and contains
 a Dockerfile that can be used after the build stage to build a docker image.
+
+As a data layer, it uses a relational database (Mysql), plus some rest repositories
+to connect to an external service
 
 ## HOW TO BUILD
 
@@ -20,7 +23,8 @@ There are two options:
 ### CI/CD
 
 Linked to this project there is a CI/CD integration (Github actions) that is triggered
-on every master push. This will push automatically the docker image on the dockerhub registry,
+on every master push and a different one on every push to other branches.
+The master pipeline will push automatically the docker image on the dockerhub registry,
 ready for the deployment.
 
 ## HOW TO RUN

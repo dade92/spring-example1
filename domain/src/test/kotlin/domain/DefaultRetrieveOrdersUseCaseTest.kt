@@ -7,6 +7,8 @@ import org.jmock.AbstractExpectations.returnValue
 import org.jmock.Expectations
 import org.jmock.auto.Mock
 import org.jmock.junit5.JUnit5Mockery
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
@@ -38,6 +40,6 @@ class DefaultRetrieveOrdersUseCaseTest {
 
         val result = defaultRetrieveOrdersUseCase.retrieve("Davide")
 
-        assertThat(result, `is`(expectedResult))
+        assertEquals(expectedResult, result)
     }
 }

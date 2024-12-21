@@ -2,19 +2,19 @@ package adapters;
 
 import adapters.users.RestUserRepository;
 import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
-import utils.Fixtures;
 import domain.User;
-import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.RestTemplate;
+import utils.Fixtures;
+
+import java.util.Optional;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RestUserRepositoryTest {
 
@@ -43,7 +43,7 @@ public class RestUserRepositoryTest {
 
         Optional<User> user = restUserRepository.fetch(666L);
 
-        assertThat(user, is(Optional.of(new User("Davide", "XXX", "address"))));
+        assertEquals(user, Optional.of(new User("Davide", "XXX", "address")));
     }
 
     @Test
@@ -51,7 +51,7 @@ public class RestUserRepositoryTest {
         wiremock.stubFor(get(urlEqualTo("/user/666"))
             .willReturn(status(HttpStatus.BAD_REQUEST.value())));
 
-        assertThat(restUserRepository.fetch(666L), is(Optional.empty()));
+        assertEquals(restUserRepository.fetch(666L), Optional.empty());
     }
 
     @Test
@@ -59,7 +59,7 @@ public class RestUserRepositoryTest {
         wiremock.stubFor(get(urlEqualTo("/user/666"))
             .willReturn(status(HttpStatus.INTERNAL_SERVER_ERROR.value())));
 
-        assertThat(restUserRepository.fetch(666L), is(Optional.empty()));
+        assertEquals(restUserRepository.fetch(666L), Optional.empty());
     }
 
     @Test
@@ -70,7 +70,7 @@ public class RestUserRepositoryTest {
 
         Optional<Boolean> result = restUserRepository.addUser(new User("Davide", "XXX", "address"));
 
-        assertThat(result, is(Optional.of(true)));
+        assertEquals(result, Optional.of(true));
     }
 
     @Test
@@ -81,7 +81,7 @@ public class RestUserRepositoryTest {
 
         Optional<Boolean> result = restUserRepository.addUser(new User("Davide", "XXX", "address"));
 
-        assertThat(result, is(Optional.empty()));
+        assertEquals(result, Optional.empty());
     }
 
     @Test
@@ -92,6 +92,6 @@ public class RestUserRepositoryTest {
 
         Optional<Boolean> result = restUserRepository.addUser(new User("Davide", "XXX", "address"));
 
-        assertThat(result, is(Optional.empty()));
+        assertEquals(result, Optional.empty());
     }
 }

@@ -11,6 +11,8 @@ import org.jmock.AbstractExpectations.returnValue
 import org.jmock.Expectations
 import org.jmock.auto.Mock
 import org.jmock.junit5.JUnit5Mockery
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
@@ -58,8 +60,8 @@ class JdbcOrdersRepositoryTest {
 
         val result = jdbcOrdersRepository.save(Order(type), username)
 
-        assertThat(fetchRow(), `is`(DBResult(type, NOW)))
-        assertThat(result, `is`(Right(Unit)))
+        assertEquals(fetchRow(), DBResult(type, NOW))
+        assertEquals(result, Right(Unit))
     }
 
     @Test
@@ -70,7 +72,7 @@ class JdbcOrdersRepositoryTest {
 
         val result = jdbcOrdersRepository.save(Order(type), anotherUsername)
 
-        assertThat(result, `is`(Left(OrdersRepositoryError.UserNotExistingError)))
+        assertEquals(result, Left(OrdersRepositoryError.UserNotExistingError))
     }
 
     @Test
@@ -84,7 +86,7 @@ class JdbcOrdersRepositoryTest {
 
         val result = jdbcOrdersRepository.retrieve(username)
 
-        assertThat(result, `is`(Right(listOf(Order("chair")))))
+        assertEquals(result, Right(listOf(Order("chair"))))
     }
 
     private fun fetchRow(): DBResult {
