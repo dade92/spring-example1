@@ -1,12 +1,12 @@
 ### Retrieve a user by id
 
-GET {{host}}/api/user/1
+GET {{host}}/api/user/4
 Content-Type: application/json
 Accept: application/json
 
 ### Retrieve a user by username
 
-GET {{host}}/api/user?username=Test
+GET {{host}}/api/user?username=Davide
 Content-Type: application/json
 Accept: application/json
 

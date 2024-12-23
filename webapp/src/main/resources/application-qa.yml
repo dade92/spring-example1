@@ -5,7 +5,9 @@ server:
 spring:
   datasource:
     spring-example:
-      url: jdbc:mysql://mysql:3306/spring-example?serverTimezone=UTC
+      host: mysql
+      port: 3306
+      database: spring-example
       username: ${MYSQL_USERNAME}
       password: ${MYSQL_PASSWORD}
 test:
