@@ -1,6 +1,6 @@
 ### Retrieve a user by id
 
-GET {{host}}/api/user/4
+GET {{host}}/api/user/1
 Content-Type: application/json
 Accept: application/json
 
@@ -36,6 +36,12 @@ Accept: application/json
     "type": "House"
   }
 }
+
+### Retrieve orders for a given user
+
+GET {{host}}/api/retrieveOrders?user=Stefania
+Content-Type: application/json
+Accept: application/json
 
 ### Retrieve list of products
 
