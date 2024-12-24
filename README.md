@@ -10,7 +10,7 @@ a Dockerfile that can be used after the build stage to build a docker image.
 As a data layer, it uses a relational database (Mysql), plus some rest repositories
 to connect to an external service
 
-## HOW TO BUILD
+## How to build
 
 There are two options:
 
@@ -26,7 +26,7 @@ on every master push and a different one on every push to other branches.
 The master pipeline will push automatically the docker image on the dockerhub registry,
 ready for the deployment.
 
-## HOW TO RUN
+## How to run
 
 ### Deploy everything
 
@@ -49,3 +49,7 @@ In local, you can connect to the local mysql using the following credentials:
 username: root
 password: password
 ```
+
+## Test resources
+
+In the `http` folder you can find http sample request.
