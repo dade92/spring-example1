@@ -39,7 +39,7 @@ Accept: application/json
 
 ### Retrieve orders for a given user
 
-GET {{host}}/api/retrieveOrders?user=Stefania
+GET {{host}}/api/retrieveOrders?user=Davide
 Content-Type: application/json
 Accept: application/json
 
