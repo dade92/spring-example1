@@ -1,6 +1,6 @@
 ### Retrieve a user by id
 
-GET {{host}}/api/user/1
+GET {{host}}/api/user/2
 Content-Type: application/json
 Accept: application/json
 
@@ -39,7 +39,7 @@ Accept: application/json
 
 ### Retrieve orders for a given user
 
-GET {{host}}/api/retrieveOrders?user=Davide
+GET {{host}}/api/retrieveOrders?user=Stefania
 Content-Type: application/json
 Accept: application/json
 
